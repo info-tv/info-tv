@@ -1,0 +1,21 @@
+{
+  "name": "info-tv",
+  "version": "0.0.0",
+  "description": "Node.js powered Digital Signage system",
+  "main": "./lib/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jukka Hyytiälä <hyytiala.jukka@gmail.com>",
+  "license": "GPLv3",
+  "plugins": [],
+  "devDependencies": {
+    "coffee-script": "^1.9.2"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "epilogue": "^0.5.1",
+    "express": "^4.12.3",
+    "sequelize": "^2.0.6"
+  }
+}
