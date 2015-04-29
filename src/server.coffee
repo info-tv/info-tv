@@ -1,8 +1,10 @@
 express = require 'express'
 Sequelize = require 'sequelize'
 epilogue = require 'epilogue'
-App = require './app'
+
 pluginmanager = require './pluginmanager'
+SubApp = require './subapp'
+Screen = require './screen'
 
 # Core of the server. It initializes http/https server, loads plugins, and
 # starts itself automatically.
@@ -12,13 +14,21 @@ pluginmanager = require './pluginmanager'
 # @since 0.0.0
 class Server
 
+  # export SubApp class
+  #
+  # @example usage
+  #   SubApp = require('info-tv').SubApp
+  #
+  @subApp: SubApp
+
+
   # Construct new server, load plugins, and start itself.
   #
   constructor: () ->
     # init express
     @app = express()
 
-    # @init sequelize
+    # init sequelize
     # @todo configure sequelize
     @sequelize = new Sequelize 'db', null, null,
       dialect: 'sqlite'
@@ -28,6 +38,9 @@ class Server
       app: @app
       sequelize: @sequelize
 
+    # load sub apps
+    new Screen @app
+
     # load plugins and then start the server
     server = this
     pluginmanager.loadAll () ->
@@ -36,7 +49,10 @@ class Server
   # start server
   #
   start: () ->
-    @app.listen 3000
-    console.log 'Listening on port 3000...'
+    server = @app.listen 3000, () ->
+      host = server.address().address
+      port = server.address().port
+
+      console.log "Litening at http://#{host}:#{port}"
 
 module.exports = Server
