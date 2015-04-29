@@ -54,11 +54,16 @@ Parent application to be mounted.
 # class Screen extends Server.SubApp
 Screen application that provides needed business logic and API plus all needed files to its browser application.
 
-# constructor new Screen([superApp])
-Creates a new sub-application with the name `screen`.
-
-**TODO: complete documentation**
+## constructor new Screen([superApp])
+Creates a new sub-application with the name `screen`. It serves content of `screen/public` folder directly to the browser.
+### optional param superApp
+Passed to parent's constructor. See constructor new Server.SubApp.
 
 # internal module pluginmanager
 
-**TODO: complete documentation**
+## async function loadAll([callback])
+Loads all plugins listed in `package.json`.
+
+KNOWN ISSUE: async.auto fails on unspecified plugin dependencies. Update async library fix it.
+### optional param callback(error = null)
+Called with `null` after all plugins are loaded completely or with error if any.

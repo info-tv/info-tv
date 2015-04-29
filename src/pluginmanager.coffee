@@ -1,16 +1,13 @@
 async = require 'async'
 pkg = require '../package.json'
 
-# @todo async.auto fails on unspecified dependencies.
+# todo: async.auto fails on unspecified dependencies.
 # Now all deps must be specified in plugin's peerDependencies
 pluginList = {}
 
 module.exports =
 
   # load all plugins listed in package.json
-  #
-  # @param callback [function] called without arguments when all plugins have
-  # been loaded
   loadAll: (callback) ->
     console.log 'Loading plugins...'
 
@@ -23,10 +20,8 @@ module.exports =
           plugin = require name
 
           # construct plugin
-          #
-          # @param done [function] called when task is completed
           pluginConstructor = (done) ->
-            new plugin # todo add params
+            new plugin # todo: add params
             done()
 
           # create dependency list for async.auto
@@ -46,7 +41,7 @@ module.exports =
         async.auto pluginList, (error, results) ->
           if error
             console.error error
+            callback?(error)
           else
             console.log 'Done loading plugins.'
-
-          callback?()
+            callback?(null)
