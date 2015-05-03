@@ -2,7 +2,7 @@ async = require 'async'
 pkg = require '../package.json'
 
 # todo: async.auto fails on unspecified dependencies.
-# Now all deps must be specified in plugin's peerDependencies
+# Now all deps must be specified in plugin's peerDependencies.
 pluginList = {}
 
 module.exports =

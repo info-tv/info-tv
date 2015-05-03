@@ -4,6 +4,7 @@ epilogue = require 'epilogue'
 
 pluginmanager = require './pluginmanager'
 SubApp = require './subapp'
+API = require './api'
 Screen = require './screen'
 
 class Server
@@ -12,8 +13,10 @@ class Server
   @SubApp: SubApp
 
   constructor: () ->
-    # init express
+    # init express and API's router
     @app = express()
+    @api = express.Router()
+    @app.use '/api', @api
 
     # init sequelize
     # TODO: configure sequelize
@@ -22,11 +25,13 @@ class Server
 
     # init epilogue
     epilogue.initialize
-      app: @app
+      app: @api
       sequelize: @sequelize
 
     # load sub-apps
-    new Screen @app
+    @subApps =
+      api: new API @api, @sequelize, epilogue
+      screen: new Screen @app, @sequelize, epilogue
 
     # load plugins and then start the server
     server = this
@@ -38,6 +43,6 @@ class Server
       host = server.address().address
       port = server.address().port
 
-      console.log "Litening at http://#{host}:#{port}"
+      console.log "Listening at http://#{host}:#{port}"
 
 module.exports = Server

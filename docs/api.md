@@ -51,6 +51,18 @@ Mounts the application to superApp. See property mountingName for example.
 ### param superApp
 Parent application to be mounted.
 
+# class API extends Server.SubApp
+API application that provides API's core components such as core models and security functions.
+
+## constructor new API(app, sequelize, epilogue)
+Creates a new API sub-application.
+### param app
+Express.Router instance
+### param sequelize
+Sequelize instance
+### param epilogue
+Epilogue
+
 # class Screen extends Server.SubApp
 Screen application that provides needed business logic and API plus all needed files to its browser application.
 
