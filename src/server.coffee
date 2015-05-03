@@ -16,7 +16,6 @@ class Server
     # init express and API's router
     @app = express()
     @api = express.Router()
-    @app.use '/api', @api
 
     # init sequelize
     # TODO: configure sequelize
@@ -32,6 +31,7 @@ class Server
     @subApps =
       api: new API @api, @sequelize, epilogue
       screen: new Screen @app, @sequelize, epilogue
+    @subApps.api.useIn @app
 
     # load plugins and then start the server
     server = this

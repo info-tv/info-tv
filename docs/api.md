@@ -14,6 +14,11 @@ Express.js application.
 ## property server.sequelize
 Sequelize ORM instance.
 
+## property server.subApps
+List of Server.SubApp instances.
+- `api`: API instance
+- `screen`: Screen instance
+
 ## async constructor new Server()
 Creates a new Express.js application with Sequelize and Epilogue. It loads plugins with pluginmanager and finally starts the server.
 
