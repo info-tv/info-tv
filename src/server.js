@@ -3,6 +3,7 @@ var http = require('http');
 var Sequelize = require('sequelize');
 
 var API = require('./api');
+var models = require('./models');
 
 var Server = function Server (callback) {
   var callbackIsFunction = callback instanceof Function;
@@ -14,6 +15,10 @@ var Server = function Server (callback) {
   });
 
   var api = new API(app, sequelize);
+  models.init(sequelize);
+
+  sequelize.sync();
+
 
   app.use('/screen', express.static(__dirname + '/screen/public'));
 
