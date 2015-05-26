@@ -8,10 +8,7 @@
   },
   "author": "Jukka Hyytiälä <hyytiala.jukka@gmail.com>",
   "license": "GPLv3",
-  "plugins": [],
-  "devDependencies": {
-    "coffee-script": "^1.9.2"
-  },
+  "devDependencies": {},
   "dependencies": {
     "async": "^0.9.0",
     "epilogue": "^0.5.1",
