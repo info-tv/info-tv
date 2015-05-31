@@ -1,7 +1,7 @@
 var epilogue = require('epilogue');
 var express = require('express');
 
-var API = function API (app, sequelize) {
+var API = function API(app, sequelize) {
   var api = express.Router();
 
   epilogue.initialize({

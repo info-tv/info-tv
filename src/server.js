@@ -5,7 +5,7 @@ var Sequelize = require('sequelize');
 var API = require('./api');
 var models = require('./models');
 
-var Server = function Server (callback) {
+var Server = function Server(callback) {
   var callbackIsFunction = callback instanceof Function;
   if (!callbackIsFunction) callback = function () {};
 
@@ -18,7 +18,6 @@ var Server = function Server (callback) {
   models.init(sequelize);
 
   sequelize.sync();
-
 
   app.use('/screen', express.static(__dirname + '/screen/public'));
 

@@ -1,10 +1,10 @@
 var epilogue = require('epilogue');
 
-var Screen = function Screen (sequelize) {
-  var Model = sequelize.define('Screen', {});
+var Screen = function Screen(sequelize) {
+  var ScreenModel = sequelize.define('Screen', {});
 
   epilogue.resource({
-    model: Model,
+    model: ScreenModel,
     endpoints: [ '/screens', '/screens/:id' ]
   });
 }
