@@ -1,3 +1,4 @@
+var bodyParser = require('body-parser');
 var express = require('express');
 var http = require('http');
 var Sequelize = require('sequelize');
@@ -13,6 +14,8 @@ var Server = function Server(callback) {
   var sequelize = new Sequelize('db', null, null, {
     dialect: 'sqlite'
   });
+
+  app.use(bodyParser.json());
 
   var api = new API(app, sequelize);
   models.init(sequelize);
