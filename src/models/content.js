@@ -1,15 +1,16 @@
-var epilogue = require('epilogue');
 var Sequelize = require('sequelize');
 
-var Content = function Content(sequelize) {
-  var ContentModel = sequelize.define('Content', {
-    type: Sequelize.STRING
+var factory = function(sequelize) {
+  if(sequelize.isDefined('Content')) return sequelize.Model('Content');
+
+  var model = sequelize.define('Content', {
+    type: {
+      type: Sequelize.STRING,
+      defaultValue: ''
+    }
   });
 
-  var contentResource = epilogue.resource({
-    model: ContentModel,
-    endpoints: [ '/contents', '/contents/:id' ]
-  });
+  return model;
 }
 
-module.exports = Content;
+module.exports = factory;

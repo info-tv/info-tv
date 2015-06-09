@@ -1,44 +1,24 @@
-var epilogue = require('epilogue');
 var Sequelize = require('sequelize');
 
-var Situation = function Situation(sequelize) {
-  var SituationModel = sequelize.define('Situation', {
+var factory = function(sequelize) {
+  if(sequelize.isDefined('Situation')) return sequelize.Model('Situation');
+
+  var model = sequelize.define('Situation', {
     condition: {
       type: Sequelize.STRING,
-      allowNull: false,
-      validate: {
-        isJSON: function (value) {
-          try {
-            JSON.parse(value);
-          } catch(e) {
-            throw new SyntaxError('Invalid JSON syntax');
-          }
-        }
-      }
+      defaultValue: 'false'
     },
     changingTime: {
       type: Sequelize.INTEGER,
-      defaultValue: 0,
-      validate: { min: 0 }
+      defaultValue: 0
     },
     status: {
       type: Sequelize.VIRTUAL,
-      defaultValue: 'false',
-      allowNull: true,
-      validate: {
-        isIn: [[ 'true', 'false', 'changing to true', 'changing to false' ]]
-      }
-    }
-  }, {
-    instanceMethods: {
-      parseCondition: function parseCondition(error) {}
+      defaultValue: 'false'
     }
   });
 
-  var situationResource = epilogue.resource({
-    model: SituationModel,
-    endpoints: [ '/situations', '/situations/:id' ]
-  });
+  return model;
 }
 
-module.exports = Situation;
+module.exports = factory;

@@ -1,13 +1,15 @@
-var Content = require('./content');
-var Screen = require('./screen');
-var Situation = require('./situation');
+var _ = require('lodash');
 
-var init = function init(sequelize) {
-  new Content(sequelize);
-  new Screen(sequelize);
-  new Situation(sequelize);
+var models = [
+  require('./content'),
+  require('./screen'),
+  require('./situation')
+];
+
+var factory = function(sequelize) {
+  _(models).each(function (model) {
+    model(sequelize);
+  });
 }
 
-module.exports = {
-  init: init
-}
+module.exports = factory;

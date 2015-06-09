@@ -1,12 +1,11 @@
-var epilogue = require('epilogue');
+var Sequelize = require('sequelize');
 
-var Screen = function Screen(sequelize) {
-  var ScreenModel = sequelize.define('Screen', {});
+var factory = function(sequelize) {
+  if(sequelize.isDefined('Screen')) return sequelize.Model('Screen');
 
-  epilogue.resource({
-    model: ScreenModel,
-    endpoints: [ '/screens', '/screens/:id' ]
-  });
+  var model = sequelize.define('Screen', {});
+
+  return model;
 }
 
-module.exports = Screen;
+module.exports = factory;

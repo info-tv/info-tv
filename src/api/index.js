@@ -1,8 +1,20 @@
 var epilogue = require('epilogue');
 var express = require('express');
+var _ = require('lodash');
+require('./utils');
 
-var API = function API(app, sequelize) {
-  var api = express.Router();
+var resources = [
+  require('./content'),
+  require('./screen'),
+  require('./situation')
+];
+
+var api = null;
+
+var factory = function(app, sequelize) {
+  if (api !== null) return api;
+
+  api = express.Router();
 
   epilogue.initialize({
     app: api,
@@ -11,7 +23,11 @@ var API = function API(app, sequelize) {
 
   app.use('/api', api);
 
-  this.sequelize = sequelize;
+  _.each(resources, function (resource) {
+    resource(sequelize);
+  });
+
+  return api;
 }
 
-module.exports = API;
+module.exports = factory;

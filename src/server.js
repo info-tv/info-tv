@@ -3,10 +3,10 @@ var express = require('express');
 var http = require('http');
 var Sequelize = require('sequelize');
 
-var API = require('./api');
+var api = require('./api');
 var models = require('./models');
 
-var Server = function Server(callback) {
+var factory = function(callback) {
   if (typeof callback !== 'function') callback = function () {};
 
   // init express application
@@ -19,8 +19,8 @@ var Server = function Server(callback) {
   });
 
   // init api and models
-  var api = new API(app, sequelize);
-  models.init(sequelize);
+  api(app, sequelize);
+  models(sequelize);
 
   // sync database
   sequelize.sync();
@@ -28,6 +28,7 @@ var Server = function Server(callback) {
   // load static folders
   app.use('/screen', express.static(__dirname + '/screen/public'));
 
+  // start server
   var server = http.createServer(app).listen(3000, function () {
     var host = server.address().address;
     var port = server.address().port;
@@ -37,9 +38,7 @@ var Server = function Server(callback) {
     callback();
   });
 
-  this.app = app;
-  this.api = api;
-  this.sequelize = sequelize;
+  return server;
 }
 
-module.exports = Server;
+module.exports = factory;
