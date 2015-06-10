@@ -15,7 +15,8 @@ var factory = function(callback) {
 
   // init sequelize
   var sequelize = new Sequelize('db', null, null, {
-    dialect: 'sqlite'
+    dialect: 'sqlite',
+    storage: '../db.sqlite'
   });
 
   // init api and models

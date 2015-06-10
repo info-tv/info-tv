@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "null",
+    "password": null,
+    "database": "db",
+    "dialect": "sqlite",
+    "storage": "db.sqlite"
+  }
+}
