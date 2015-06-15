@@ -1,11 +1,11 @@
 var Sequelize = require('sequelize');
 
-var factory = function(sequelize) {
-  if(sequelize.isDefined('Screen')) return sequelize.Model('Screen');
+var getScreenModel = function getScreenModel(sequelize) {
+  if(sequelize.isDefined('Screen')) return sequelize.model('Screen');
 
   var model = sequelize.define('Screen', {});
 
   return model;
 }
 
-module.exports = factory;
+module.exports = getScreenModel;

@@ -1,15 +1,19 @@
 var _ = require('lodash');
 
-var models = [
-  require('./content'),
-  require('./screen'),
-  require('./situation')
-];
+var getters = {
+  Content: require('./content'),
+  Screen: require('./screen'),
+  Situation: require('./situation')
+};
 
-var factory = function(sequelize) {
-  _(models).each(function (model) {
-    model(sequelize);
+var getModels = function(sequelize) {
+  var models = {};
+
+  _.each(getters, function (getModel, name) {
+    models[name] = getModel(sequelize);
   });
+
+  return models;
 }
 
-module.exports = factory;
+module.exports = getModels;

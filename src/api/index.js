@@ -1,33 +1,32 @@
-var epilogue = require('epilogue');
+var Epilogue = require('epilogue');
 var express = require('express');
+var memoize = require('memoizee');
 var _ = require('lodash');
 require('./utils');
 
-var resources = [
+var getters = [
   require('./content'),
   require('./screen'),
   require('./situation')
 ];
 
-var api = null;
-
-var factory = function(app, sequelize) {
-  if (api !== null) return api;
-
+var getAPI = memoize(function(app, sequelize) {
   api = express.Router();
 
-  epilogue.initialize({
-    app: api,
+  var epilogue = new Epilogue.initialize({
+    app: app,
     sequelize: sequelize
   });
+  // hack: make Epilogue class methods available to just created instance.
+  _.extend(epilogue, Epilogue);
 
   app.use('/api', api);
 
-  _.each(resources, function (resource) {
-    resource(sequelize);
+  _.each(getters, function (getResource) {
+    getResource(epilogue, sequelize);
   });
 
   return api;
-}
+});
 
-module.exports = factory;
+module.exports = getAPI;

@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 
-var factory = function(sequelize) {
-  if(sequelize.isDefined('Content')) return sequelize.Model('Content');
+var getContentModel = function getContentModel(sequelize) {
+  if(sequelize.isDefined('Content')) return sequelize.model('Content');
 
   var model = sequelize.define('Content', {
     type: {
@@ -13,4 +13,4 @@ var factory = function(sequelize) {
   return model;
 }
 
-module.exports = factory;
+module.exports = getContentModel;

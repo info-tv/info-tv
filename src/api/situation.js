@@ -1,23 +1,24 @@
-var epilogue = require('epilogue');
+var memoize = require('memoizee');
 var validate = require('validate.js');
 var _ = require('lodash');
-var SituationModel = require('../models/situation');
 
-var factory = function(sequelize) {
-  var model = SituationModel(sequelize);
+var getSituationModel = require('../models/situation');
 
-  var resource = epilogue.resource({
-    model: model,
+var getSituationResource = memoize(function(epilogue, sequelize) {
+  var Situation = getSituationModel(sequelize);
+
+  situationResource = epilogue.resource({
+    model: Situation,
     endpoints: [ '/situations', '/situations/:id' ]
   });
 
-  resource.use({
+  situationResource.use({
     create: { write: { before: validateResource } },
     update: { write: { before: validateResource } }
   });
 
-  return resource;
-}
+  return situationResource;
+});
 
 var validationRules = {
   condition: {
@@ -47,8 +48,8 @@ var validateResource = function validateResource(req, res, context) {
 
 var parseCondition = function parseCondition(value) {}
 
-factory.conditionParser = {
+getSituationResource.conditionParser = {
   parse: parseCondition
 };
 
-module.exports = factory;
+module.exports = getSituationResource;

@@ -1,15 +1,16 @@
-var epilogue = require('epilogue');
-var ScreenModel = require('../models/screen');
+var memoize = require('memoizee');
 
-var factory = function(sequelize) {
-  var model = ScreenModel(sequelize);
+var getScreenModel = require('../models/screen');
 
-  var resource = epilogue.resource({
-    model: model,
+var getScreenResource = memoize(function(epilogue, sequelize) {
+  var Screen = getScreenModel(sequelize);
+
+  screenResource = epilogue.resource({
+    model: Screen,
     endpoints: [ '/screens', '/screens/:id' ]
   });
 
-  return resource;
-}
+  return screenResource;
+});
 
-module.exports = factory;
+module.exports = getScreenResource;

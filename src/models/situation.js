@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 
-var factory = function(sequelize) {
-  if(sequelize.isDefined('Situation')) return sequelize.Model('Situation');
+var getSituationModel = function getSituationModel(sequelize) {
+  if(sequelize.isDefined('Situation')) return sequelize.model('Situation');
 
   var model = sequelize.define('Situation', {
     condition: {
@@ -21,4 +21,4 @@ var factory = function(sequelize) {
   return model;
 }
 
-module.exports = factory;
+module.exports = getSituationModel;

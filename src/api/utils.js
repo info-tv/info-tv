@@ -1,4 +1,5 @@
 var validate = require('validate.js');
+
 var conditionParser = require('./situation').conditionParser;
 
 validate.validators.JSON = function isJSON(value) {

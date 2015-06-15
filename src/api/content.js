@@ -1,15 +1,17 @@
-var epilogue = require('epilogue');
-var ContentModel = require('../models/content');
+var memoize = require('memoizee');
+var _ = require('lodash');
 
-var factory = function(sequelize) {
-  var model = ContentModel(sequelize);
+var getContentModel = require('../models/content');
 
-  var resource = epilogue.resource({
-    model: model,
+var getContentResource = memoize(function(epilogue, sequelize) {
+  var Content = getContentModel(sequelize);
+
+  var contentResource = epilogue.resource({
+    model: Content,
     endpoints: [ '/contents', '/contents/:id' ]
   });
 
-  return resource;
-}
+  return contentResource;
+});
 
-module.exports = factory;
+module.exports = getContentResource;
