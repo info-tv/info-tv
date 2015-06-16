@@ -6,7 +6,13 @@ var Sequelize = require('sequelize');
 var api = require('./api');
 var models = require('./models');
 
-var factory = function(callback) {
+/**
+ * Create and start HTTP server with express application to port 3000.
+ *
+ * @param {function()} [callback] - Callback function called when server is
+ *                                  running.
+ */
+var createServer = function createServer(callback) {
   if (typeof callback !== 'function') callback = function () {};
 
   // init express application
@@ -42,4 +48,4 @@ var factory = function(callback) {
   return server;
 }
 
-module.exports = factory;
+module.exports = createServer;

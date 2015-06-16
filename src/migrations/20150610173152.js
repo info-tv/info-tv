@@ -1,6 +1,11 @@
 'use strict';
 
 module.exports = {
+  /**
+   * Create Contents, Screens and Situations tables
+   *
+   * @returns {Sequelize.Promise}
+   */
   up: function (queryInterface, Sequelize) {
     var promises = [];
 
@@ -70,6 +75,11 @@ module.exports = {
     return Sequelize.Promise.all(promises);
   },
 
+  /**
+   * Drop Contents, Screens and Situations tables
+   *
+   * @returns {Sequelize.Promise}
+   */
   down: function (queryInterface, Sequelize, done) {
     var promises = [];
 
