@@ -48,7 +48,7 @@ describe('api', function () {
   it('should load all resources', function () {
     var api = getAPI(app, sequelize);
 
-    var paths = _.map(app._router.stack, function (item) {
+    var paths = _.map(api.stack, function (item) {
       return _.get(item, 'route.path');
     });
 
