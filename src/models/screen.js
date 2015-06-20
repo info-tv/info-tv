@@ -1,4 +1,5 @@
 var Sequelize = require('sequelize');
+var getModel = require('./abstract-model');
 
 /**
  * Create and cache Sequelize model
@@ -7,11 +8,11 @@ var Sequelize = require('sequelize');
  * @returns {Sequelize.Model} - Created (or cached) model
  */
 var getScreenModel = function getScreenModel(sequelize) {
-  if(sequelize.isDefined('Screen')) return sequelize.model('Screen');
-
-  var model = sequelize.define('Screen', {});
-
-  return model;
+  return getModel({
+    sequelize: sequelize,
+    modelName: 'Screen',
+    attributes: {}
+  });
 }
 
 module.exports = getScreenModel;

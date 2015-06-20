@@ -1,6 +1,5 @@
 var memoize = require('memoizee');
-var _ = require('lodash');
-
+var getResource = require('./abstract-resource');
 var getContentModel = require('../models/content');
 
 /**
@@ -11,14 +10,12 @@ var getContentModel = require('../models/content');
  * @returns {Epilogue.Resource} - Created (or cached) resource
  */
 var getContentResource = memoize(function(epilogue, sequelize) {
-  var Content = getContentModel(sequelize);
-
-  var contentResource = epilogue.resource({
-    model: Content,
-    endpoints: [ '/contents', '/contents/:id' ]
+  return getResource({
+    epilogue: epilogue,
+    sequelize: sequelize,
+    getModel: getContentModel,
+    validationRules: {}
   });
-
-  return contentResource;
 });
 
 module.exports = getContentResource;

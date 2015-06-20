@@ -1,5 +1,5 @@
 var memoize = require('memoizee');
-
+var getResource = require('./abstract-resource');
 var getScreenModel = require('../models/screen');
 
 /**
@@ -10,14 +10,12 @@ var getScreenModel = require('../models/screen');
  * @returns {Epilogue.Resource} - Created (or cached) resource
  */
 var getScreenResource = memoize(function(epilogue, sequelize) {
-  var Screen = getScreenModel(sequelize);
-
-  var screenResource = epilogue.resource({
-    model: Screen,
-    endpoints: [ '/screens', '/screens/:id' ]
+  return getResource({
+    epilogue: epilogue,
+    sequelize: sequelize,
+    getModel: getScreenModel,
+    validationRules: {}
   });
-
-  return screenResource;
 });
 
 module.exports = getScreenResource;
