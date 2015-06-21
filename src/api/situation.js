@@ -1,5 +1,4 @@
 var memoize = require('memoizee');
-var validate = require('validate.js');
 var getResource = require('./abstract-resource');
 var getSituationModel = require('../models/situation');
 

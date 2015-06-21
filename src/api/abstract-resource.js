@@ -1,3 +1,4 @@
+var validate = require('validate.js');
 var _ = require('lodash');
 
 /**
