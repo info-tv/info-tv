@@ -12,6 +12,10 @@ var getScreenModel = function getScreenModel(sequelize) {
     sequelize: sequelize,
     modelName: 'Screen',
     attributes: {}
+  }, function addRelations(Screen) {
+    var Situation = require('./situation')(sequelize);
+
+    Screen.belongsToMany(Situation);
   });
 }
 

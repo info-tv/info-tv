@@ -1,9 +1,9 @@
 var _ = require('lodash');
 
-var getters = {
-  Content: require('./content'),
-  Screen: require('./screen'),
-  Situation: require('./situation')
+var paths = {
+  Content:   './content',
+  Screen:    './screen',
+  Situation: './situation'
 };
 
 /**
@@ -20,8 +20,8 @@ var getters = {
 var getModels = function(sequelize) {
   var models = {};
 
-  _.each(getters, function (getModel, name) {
-    models[name] = getModel(sequelize);
+  _.each(paths, function (path, name) {
+    models[name] = require(path)(sequelize);
   });
 
   return models;

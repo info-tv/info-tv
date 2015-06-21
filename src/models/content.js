@@ -17,6 +17,10 @@ var getContentModel = function getContentModel(sequelize) {
         defaultValue: ''
       }
     }
+  }, function addRelations(Content) {
+    var Situation = require('./situation')(sequelize);
+
+    Content.belongsToMany(Situation);
   });
 }
 

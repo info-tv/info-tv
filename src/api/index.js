@@ -4,10 +4,10 @@ var memoize = require('memoizee');
 var _ = require('lodash');
 require('./utils');
 
-var getters = [
-  require('./content'),
-  require('./screen'),
-  require('./situation')
+var paths = [
+  './content',
+  './screen',
+  './situation'
 ];
 
 /**
@@ -30,8 +30,8 @@ var getAPI = memoize(function(app, sequelize) {
 
   app.use('/api', api);
 
-  _.each(getters, function (getResource) {
-    getResource(epilogue, sequelize);
+  _.each(paths, function (path) {
+    require(path)(epilogue, sequelize);
   });
 
   return api;

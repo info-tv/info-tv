@@ -8,10 +8,10 @@ var getModel = require('./abstract-model');
  * @returns {Sequelize.Model} - Created (or cached) model
  */
 var getSituationModel = function getSituationModel(sequelize) {
-return getModel({
-  sequelize: sequelize,
-  modelName: 'Situation',
-  attributes: {
+  return getModel({
+    sequelize: sequelize,
+    modelName: 'Situation',
+    attributes: {
       condition: {
         type: Sequelize.STRING,
         defaultValue: 'false'
@@ -25,6 +25,12 @@ return getModel({
         defaultValue: 'false'
       }
     }
+  }, function callback(Situation) {
+    var Screen = require('./screen')(sequelize);
+    var Content = require('./content')(sequelize);
+
+    Situation.belongsToMany(Screen);
+    Situation.belongsToMany(Content);
   });
 }
 
