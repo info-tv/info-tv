@@ -20,7 +20,10 @@ var getContentModel = function getContentModel(sequelize) {
   }, function addRelations(Content) {
     var Situation = require('./situation')(sequelize);
 
-    Content.belongsToMany(Situation);
+    Content.belongsToMany(Situation, {
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE'
+    });
   });
 }
 

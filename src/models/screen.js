@@ -15,7 +15,10 @@ var getScreenModel = function getScreenModel(sequelize) {
   }, function addRelations(Screen) {
     var Situation = require('./situation')(sequelize);
 
-    Screen.belongsToMany(Situation);
+    Screen.belongsToMany(Situation, {
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE'
+    });
   });
 }
 
