@@ -30,11 +30,13 @@ var getSituationModel = function getSituationModel(sequelize) {
     var Content = require('./content')(sequelize);
 
     Situation.belongsToMany(Screen, {
+      through: 'ScreensSituations',
       onDelete: 'SET NULL',
       onUpdate: 'CASCADE'
     });
 
     Situation.belongsToMany(Content, {
+      through: 'ContentsSituations',
       onDelete: 'SET NULL',
       onUpdate: 'CASCADE'
     });

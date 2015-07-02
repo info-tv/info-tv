@@ -1,6 +1,7 @@
 var memoize = require('memoizee');
 var getResource = require('./abstract-resource');
 var getSituationModel = require('../models/situation');
+var conditionParser = require('../condition-parser');
 
 /**
  * Create and cache Epilogue resource for Situation model
@@ -30,10 +31,6 @@ var getSituationResource = memoize(function(epilogue, sequelize) {
   });
 });
 
-var parseCondition = function parseCondition(value) {}
-
-getSituationResource.conditionParser = {
-  parse: parseCondition
-};
+getSituationResource.conditionParser = conditionParser;
 
 module.exports = getSituationResource;

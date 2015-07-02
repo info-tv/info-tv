@@ -1,3 +1,6 @@
+var validate = require('validate.js');
+validate.moment = require('moment');
+
 var server = require('./server');
 
-var server = server();
+server();

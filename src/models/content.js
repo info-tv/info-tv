@@ -21,6 +21,7 @@ var getContentModel = function getContentModel(sequelize) {
     var Situation = require('./situation')(sequelize);
 
     Content.belongsToMany(Situation, {
+      through: 'ContentsSituations',
       onDelete: 'SET NULL',
       onUpdate: 'CASCADE'
     });

@@ -16,6 +16,7 @@ var getScreenModel = function getScreenModel(sequelize) {
     var Situation = require('./situation')(sequelize);
 
     Screen.belongsToMany(Situation, {
+      through: 'ScreensSituations',
       onDelete: 'SET NULL',
       onUpdate: 'CASCADE'
     });
