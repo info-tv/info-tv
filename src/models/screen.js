@@ -20,6 +20,6 @@ var getScreenModel = function getScreenModel(sequelize) {
       onUpdate: 'CASCADE'
     });
   });
-}
+};
 
 module.exports = getScreenModel;

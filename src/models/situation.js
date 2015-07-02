@@ -39,6 +39,6 @@ var getSituationModel = function getSituationModel(sequelize) {
       onUpdate: 'CASCADE'
     });
   });
-}
+};
 
 module.exports = getSituationModel;

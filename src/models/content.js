@@ -25,6 +25,6 @@ var getContentModel = function getContentModel(sequelize) {
       onUpdate: 'CASCADE'
     });
   });
-}
+};
 
 module.exports = getContentModel;
