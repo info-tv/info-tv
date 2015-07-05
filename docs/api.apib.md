@@ -135,8 +135,8 @@ Screen resource contains configurations for each screen devices.
 
 # Group Situation
 
-Situation resource contains information about moments when to show a spesific
-Content resource on a spesific Screen resource and when not to.
+Situation resource contains information about moments when to show a specific
+Content resource on a specific Screen resource and when not to.
 
 ## Situation [/api/situations/{id}]
 
@@ -158,7 +158,7 @@ Content resource on a spesific Screen resource and when not to.
 
     - changingTime: `0` (number, optional)
 
-        Duration of "chaging to x" statuses. Used when change of stable status
+        Duration of "changing to x" statuses. Used when change of stable status
         can be foreseen.
 
         - Default: `0`
@@ -194,7 +194,7 @@ Content resource on a spesific Screen resource and when not to.
 
         - changingTime (number, optional)
 
-            Duration of "chaging to x" statuses. Used when change of stable
+            Duration of "changing to x" statuses. Used when change of stable
             status can be foreseen.
 
 - Response 200 (application/json)

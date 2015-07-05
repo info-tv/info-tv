@@ -1,5 +1,4 @@
 var _ = require('lodash');
-
 var AbstractItem = require('./abstract-item');
 
 var parseCondition = function parseCondition(json) {

@@ -24,7 +24,12 @@ var Clock = function Clock(path, from, to) {
   };
 
   var errors = validate({ from: from, to: to }, rules);
-  if (errors) throw new Error('Validation failed at \'' + path + '\': ' + JSON.stringify(errors));
+
+  if (errors) {
+    errors = JSON.stringify(errors);
+    var msg = 'Validation failed at \'' + path + '\': ' + errors;
+    throw new Error(msg);
+  }
 };
 
 
@@ -36,7 +41,7 @@ var Clock = function Clock(path, from, to) {
  * to:     true  | true             | true | changing to false | false
  * result: false | changing to true | true | changing to false | false
  *
- * @return {string} - 'false' | 'changing to true' | 'changing to false' | 'true'
+ * @return {string} - false, changing to true, changing to false, or true
  */
 Clock.prototype.getStatus = function getStatus() {
   var values = [ 'false', 'changing to true', 'changing to false', 'true' ];

@@ -75,7 +75,7 @@ module.exports = {
    *
    * @returns {Sequelize.Promise}
    */
-  down: function (queryInterface, Sequelize, done) {
+  down: function (queryInterface, Sequelize) {
     var promises = [];
 
     promises.push(queryInterface.dropTable('ScreensSituations'));
@@ -83,4 +83,4 @@ module.exports = {
 
     return Sequelize.Promise.all(promises);
   }
-}
+};

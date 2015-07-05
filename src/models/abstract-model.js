@@ -25,6 +25,6 @@ var getModel = function getModel(options, callback) {
   callback(model);
 
   return model;
-}
+};
 
 module.exports = getModel;

@@ -10,7 +10,7 @@ validate.validators.JSON = function isJSON(value) {
     // e.g. 'is not valid JSON; SyntaxError: Unexpected end of input'
     return 'is not valid JSON; ' + e.name + ': ' + e.message;
   }
-}
+};
 
 validate.validators.condition = function isCondition(value) {
   try {
@@ -20,4 +20,4 @@ validate.validators.condition = function isCondition(value) {
     // e.g. 'is not valid Condition; SyntaxError: Unexpected end of input'
     return 'is not valid Condition; ' + e.name + ': ' + e.message;
   }
-}
+};

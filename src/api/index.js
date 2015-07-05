@@ -16,10 +16,10 @@ var paths = [
  *
  * @param {Express} app - Express application to use
  * @param {Sequelize} sequelize - Sequelize instance to use as an ORM
- * @returns {Express.Router} - Created (or cahced) API router
+ * @returns {Express.Router} - Created (or cached) API router
  */
 var getAPI = memoize(function(app, sequelize) {
-  api = express.Router();
+  var api = express.Router();
 
   var epilogue = new Epilogue.initialize({
     app: api,

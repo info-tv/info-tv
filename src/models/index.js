@@ -25,6 +25,6 @@ var getModels = function(sequelize) {
   });
 
   return models;
-}
+};
 
 module.exports = getModels;

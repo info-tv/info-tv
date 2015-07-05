@@ -41,13 +41,20 @@ AbstractItem.getItem = function getItem(path, childs, type) {
   var newPath = path + '.' + type;
   if (path === '') newPath = type;
 
-  if (type === 'oneOf') return new (require('./one-of'))(newPath, childs);
-  if (type === 'all') return new (require('./all'))(newPath, childs);
-  if (type === 'clock') return new (require('./clock'))(newPath, childs.from, childs.to);
+  switch (type) {
+    case 'oneOf':
+      return new (require('./one-of'))(newPath, childs);
+    case 'all':
+      return new (require('./all'))(newPath, childs);
+    case 'clock':
+      return new (require('./clock'))(newPath, childs.from, childs.to);
+  }
 
-  var message = 'Unsupported element \'' + type + '\' at \'' + path + '\'';
-  if (typeof type === 'undefined') message = 'Unsupported element at \'' + path + '\'';
-  throw new Error(message);
+  if (typeof type === 'undefined') {
+    throw new Error('Unsupported element at \'' + path + '\'');
+  } else {
+    throw new Error('Unsupported element \'' + type + '\' at \'' + path + '\'');
+  }
 };
 
 module.exports = AbstractItem;
