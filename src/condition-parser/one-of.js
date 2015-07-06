@@ -1,6 +1,16 @@
 var _ = require('lodash');
 var AbstractGroup = require('./abstract-group');
 
+/**
+ * Item group that implements OR approach.
+ *
+ * @param {string} path - path of parent item in object hash; used for locating
+ * errors.
+ * @param {Object} childs - rest of object hash
+ * @throws {Error} - If there is a problem with parsing childs
+ * @constructor
+ * @extends AbstractGroup
+ */
 var OneOf = function (path, childs) {
   AbstractGroup.apply(this, [path, childs]);
 };
