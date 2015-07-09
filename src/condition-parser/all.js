@@ -7,13 +7,17 @@ var AbstractGroup = require('./abstract-group');
  * @param {string} path - path of parent item in object hash; used for locating
  * errors.
  * @param {Object} childs - rest of object hash
+ * @param {number} [changingTime=0] - duration of 'changing to ...' statuses in
+ * milliseconds used when change of permanent status can be foreseen
  * @throws {Error} - If there is a problem with parsing childs
  * @constructor
  * @extends AbstractGroup
  */
-var All = function (path, childs) {
-  AbstractGroup.apply(this, [path, childs]);
+var All = function (path, childs, changingTime) {
+  AbstractGroup.apply(this, [path, childs, changingTime]);
 };
+
+All.prototype = _.create(AbstractGroup.prototype, { constructor: All });
 
 /**
  * Get lowest status of childs. Meaning of statuses are:
@@ -35,4 +39,4 @@ All.prototype.getStatus = function getStatus() {
   return value !== -1 ? values[value] : '';
 };
 
-module.exports = _.extend(All, AbstractGroup);
+module.exports = All;

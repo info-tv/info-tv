@@ -9,15 +9,19 @@ var To = require('./to');
  *
  * @param {string} path - path of parent item in object hash; used for locating
  * errors
- * @param {Object} from - from object hash; if present from <= to
- * @param {Object} to - to object hash; if present to >= from
+ * @param {string|number} [from] - start time; if present from <= to
+ * @param {string|number} [to] - end time; if present to >= from
+ * @param {number} [changingTime=0] - duration of 'changing to ...' statuses in
+ * milliseconds used when change of permanent status can be foreseen
  * @throws {Error} - If there is problems with parsing or validating from and to
  * @constructor
  * @extends AbstractItem
  */
-var Clock = function Clock(path, from, to) {
-  if (from) this.from = new From(from);
-  if (to) this.to = new To(to);
+var Clock = function Clock(path, from, to, changingTime) {
+  AbstractItem.apply(this, [changingTime]);
+
+  if (from) this.from = new From(from, changingTime);
+  if (to) this.to = new To(to, changingTime);
 
   var rules = {
     from: {
@@ -38,10 +42,12 @@ var Clock = function Clock(path, from, to) {
 
   if (errors) {
     errors = JSON.stringify(errors);
-    var msg = 'Validation failed at \'' + path + '\': ' + errors;
-    throw new Error(msg);
+    var error = 'Validation failed at \'' + path + '\': ' + errors;
+    throw new Error(error);
   }
 };
+
+Clock.prototype = _.create(AbstractItem.prototype, { constructor: Clock });
 
 
 /**
@@ -60,24 +66,20 @@ Clock.prototype.getStatus = function getStatus() {
   var from = this.from ? this.from.getStatus() : 'true';
   var to = this.to ? this.to.getStatus() : 'true';
 
-  var value = _.min([from, to], function (status) {
+  return _.min([from, to], function (status) {
     return _.indexOf(values, status);
   });
-
-  return value !== -1 ? values[value] : '';
 };
 
 /**
  * Listen from and to for their status changes
  *
- * @param {number} changingTime - duration of 'changing to ...' statuses in
- * milliseconds used when change of permanent status can be foreseen
  * @param {listenCallback} callback - called when status has changed
  * @protected
  */
-Clock.prototype._listenChilds = function _listenChilds(changingTime, callback) {
-  if (this.from) this.from.listen(changingTime, callback);
-  if (this.to) this.to.listen(changingTime, callback);
+Clock.prototype._listenChilds = function _listenChilds(callback) {
+  if (this.from) this.from.listen(callback);
+  if (this.to) this.to.listen(callback);
 };
 
-module.exports = _.extend(Clock, AbstractItem);
+module.exports = Clock;
