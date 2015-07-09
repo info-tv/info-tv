@@ -1,6 +1,8 @@
 var expect = require('chai').expect;
 var Sequelize = require('sequelize');
 _ = require('lodash');
+
+var LockManager = require('../_lock-manager');
 var $ = require('../_utils');
 
 // files to test
@@ -9,12 +11,14 @@ var getScreenModel = require('../../src/models/screen');
 describe('models/screen', function () {
   var sequelize;
 
-  before(function (done) {
+  before(function () {
     sequelize = new Sequelize('db', null, null, {
       dialect: 'sqlite'
     });
+  });
 
-    done();
+  beforeEach(function () {
+    return LockManager.getLock('shared');
   });
 
   it('should create database model', function () {
@@ -28,6 +32,8 @@ describe('models/screen', function () {
     // assert model is defined
     expect(fn).to.not.throw(Error);
     expect(model).to.be.equal(fn());
+
+    LockManager.free();
   });
 
   it('should cache the database model', function () {
@@ -36,5 +42,7 @@ describe('models/screen', function () {
 
     // assert new model is old model
     expect(newModel).to.be.equal(oldModel);
+
+    LockManager.free();
   });
 });

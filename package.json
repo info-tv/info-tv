@@ -16,6 +16,7 @@
   "author": "Jukka Hyytiälä <hyytiala.jukka@gmail.com>",
   "license": "GPLv3",
   "devDependencies": {
+    "bluebird": "^2.9.33",
     "chai": "^3.0.0",
     "gulp": "^3.9.0",
     "gulp-mocha": "^2.1.1",
