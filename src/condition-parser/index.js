@@ -10,7 +10,7 @@ var AbstractItem = require('./abstract-item');
 
 module.exports = {
   /**
-   * Parses JSON string or object representation
+   * Parses JSON string or equivalent object representation of condition
    *
    * @param {Object|string} json - JSON to parse
    * @param {number} [changingTime=0] - duration of 'changing to ...' statuses

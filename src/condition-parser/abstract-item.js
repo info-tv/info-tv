@@ -26,12 +26,12 @@ var AbstractItem = function AbstractItem(changingTime) {
  */
 AbstractItem.getItem = function getItem(params) {
   var path = params.path || '';
-  var type = params.type;
+  var type = params.type || '';
   var childs = params.childs;
-  var changingTime = params.changingTime;
+  var changingTime = params.changingTime || 0;
 
-  // check if called without type
-  if (typeof type === 'undefined') {
+  // if called without type, childs is wrapper object
+  if (type === '') {
     type = Object.keys(childs)[0];
     childs = childs[type];
   }
@@ -46,12 +46,11 @@ AbstractItem.getItem = function getItem(params) {
       return new (require('./all'))(newPath, childs, changingTime);
     case 'clock':
       return new (require('./clock'))(newPath, childs.from, childs.to, changingTime);
-  }
 
-  if (typeof type === 'undefined') {
-    throw new Error('Unsupported element at \'' + path + '\'');
-  } else {
-    throw new Error('Unsupported element \'' + type + '\' at \'' + path + '\'');
+    case undefined:
+      throw new Error('Unsupported element at "' + path + '"');
+    default:
+      throw new Error('Unsupported element "' + type + '" at "' + path + '"');
   }
 };
 

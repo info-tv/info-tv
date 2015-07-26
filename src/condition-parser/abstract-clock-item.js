@@ -14,6 +14,7 @@ var AbstractClockItem = function AbstractClockItem(date, changingTime) {
   AbstractItem.apply(this, [changingTime]);
 
   this.date = new Date(date);
+  this.foreseeDate = new Date(this.date.getTime() - changingTime);
   this.status = '';
   this._timeoutIDs = [];
 };
@@ -29,6 +30,8 @@ AbstractClockItem.prototype.destroy = function destroy() {
   _.each(this._timeoutIDs, function (timeoutID) {
     clearTimeout(timeoutID);
   }, this);
+
+  this._timeoutIDs = [];
 };
 
 /**
@@ -41,7 +44,7 @@ AbstractClockItem.prototype.getStatus = function getStatus() {
 };
 
 /**
- * Changes status to newStatus if previous status is listed in allowedStatuses
+ * Changes status to newStatus if current status is listed in allowedStatuses
  * and call callback if oldStatus doesn't match to current/updated status.
  *
  * @param {string[]} allowedStatuses - list of previous statuses that are

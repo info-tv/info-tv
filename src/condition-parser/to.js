@@ -5,13 +5,22 @@ var AbstractClockItem = require('./abstract-clock-item');
  * Clock watch that implements TO approach
  *
  * @param {string|number} date - time to wait for
- * @param {number} [changingTime=0] - duration of 'changing to ...' statuses in
- * milliseconds used when change of permanent status can be foreseen
+ * @param {number} [changingTime=0] - duration of 'changing to false' status in
+ * milliseconds used when status change from true to false can be foreseen
  * @constructor
  * @extends AbstractClockItem
  */
 var To = function To (date, changingTime) {
   AbstractClockItem.apply(this, [date, changingTime]);
+
+  var now = new Date();
+  if (this.date <= now) {
+    this.status = 'false';
+  } else if (this.foreseeDate <= now) {
+    this.status = 'changing to false';
+  } else {
+    this.status = 'true';
+  }
 };
 
 To.prototype = _.create(AbstractClockItem.prototype, { constructor: To });
