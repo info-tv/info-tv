@@ -1,8 +1,6 @@
 var expect = require('chai').expect;
 var Sequelize = require('sequelize');
 _ = require('lodash');
-
-var LockManager = require('../_lock-manager');
 var $ = require('../_utils');
 
 // files to test
@@ -11,14 +9,12 @@ var getSituationModel = require('../../src/models/situation');
 describe('models/situation', function () {
   var sequelize;
 
-  before(function () {
+  before(function (done) {
     sequelize = new Sequelize('db', null, null, {
       dialect: 'sqlite'
     });
-  });
 
-  beforeEach(function () {
-    return LockManager.getLock('shared');
+    done();
   });
 
   it('should create database model', function () {
@@ -32,8 +28,6 @@ describe('models/situation', function () {
     // assert model is defined
     expect(fn).to.not.throw(Error);
     expect(model).to.be.equal(fn());
-
-    LockManager.free();
   });
 
   it('should cache the database model', function () {
@@ -49,12 +43,6 @@ describe('models/situation', function () {
     var situation = Situation.build();
 
     // assert situation has condition, changingTime, and status fields
-    expect(situation.dataValues).to.include.all.keys(
-      'condition',
-      'changingTime',
-      'status'
-    );
-
-    LockManager.free();
+    expect(situation.dataValues).to.include.all.keys('condition', 'changingTime', 'status');
   });
 });

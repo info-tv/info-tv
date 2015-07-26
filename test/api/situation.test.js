@@ -3,8 +3,6 @@ var expect = require('chai').expect;
 var express = require('express');
 var Sequelize = require('sequelize');
 _ = require('lodash');
-
-var LockManager = require('../_lock-manager');
 var $ = require('../_utils');
 
 // files to test
@@ -16,7 +14,7 @@ var getSituationModel = require('../../src/models/situation');
 describe('api/situation', function () {
   var sequelize, api, epilogue;
 
-  before(function () {
+  before(function (done) {
     api = express();
     sequelize = new Sequelize('db', null, null, {
       dialect: 'sqlite',
@@ -29,10 +27,8 @@ describe('api/situation', function () {
     });
     // hack: make Epilogue class methods available to just created instance.
     _.extend(epilogue, Epilogue);
-  });
 
-  beforeEach(function () {
-    return LockManager.getLock('shared');
+    done();
   });
 
   it('should use models/situation as database model', function () {
@@ -41,19 +37,15 @@ describe('api/situation', function () {
 
     // assert resource uses models/situation as model
     expect(resource.model).to.equal(Model);
-
-    LockManager.free();
   });
 
   it('should create resource', function () {
-    var fn = function () { return _.get(api, '_router.stack') };
+    var fn = function () { return _.get(api, '_router.stack') }
 
     var resource = getSituationResource(epilogue, sequelize);
 
     // assert resource is defined
     expect(fn()).to.be.an('array');
-
-    LockManager.free();
   });
 
   it('should cache the resource', function () {
@@ -62,8 +54,6 @@ describe('api/situation', function () {
 
     // assert new resource is old resource
     expect(newResource).to.be.equal(oldResource);
-
-    LockManager.free();
   });
 
   it('should be mounted to /situations[/:id]', function () {
@@ -75,8 +65,6 @@ describe('api/situation', function () {
 
     // assert paths to contain /situations and /situations/:id
     expect(paths).to.include.all.members(['/situations', '/situations/:id']);
-
-    LockManager.free();
   });
 
   //it('should validate input when creating resource', $.todo);

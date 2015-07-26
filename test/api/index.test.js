@@ -3,8 +3,6 @@ var expect = require('chai').expect;
 var express = require('express');
 var Sequelize = require('sequelize');
 _ = require('lodash');
-
-var LockManager = require('../_lock-manager');
 var $ = require('../_utils');
 
 // files to test
@@ -13,7 +11,7 @@ var getAPI = require('../../src/api');
 describe('api', function () {
   var app, sequelize, epilogue;
 
-  before(function() {
+  before(function(done) {
     app = express();
     sequelize = new Sequelize('db', null, null, {
       dialect: 'sqlite',
@@ -26,21 +24,17 @@ describe('api', function () {
     });
     // hack: make Epilogue class methods available to just created instance.
     _.extend(epilogue, Epilogue);
-  });
 
-  beforeEach(function () {
-    return LockManager.getLock('shared');
+    done();
   });
 
   it('should create api', function () {
-    var fn = function () { return _.get(app, '_router.stack') };
+    var fn = function () { return _.get(app, '_router.stack') }
 
     var api = getAPI(app, sequelize);
 
     // assert api is defined
     expect(fn()).to.be.an('array');
-
-    LockManager.free();
   });
 
   it('should cache the api', function () {
@@ -49,8 +43,6 @@ describe('api', function () {
 
     // assert new resource is old resource
     expect(newAPI).to.be.equal(oldAPI);
-
-    LockManager.free();
   });
 
   it('should load all resources', function () {
@@ -66,8 +58,6 @@ describe('api', function () {
       '/screens',
       '/situations'
     ]);
-
-    LockManager.free();
   });
 
   it('should be mounted to /api', function () {
@@ -81,7 +71,5 @@ describe('api', function () {
       // assert router match paths starting with /api
       expect(router.regexp.exec('/api')).to.not.be.null;
     }
-
-    LockManager.free();
   });
 });
