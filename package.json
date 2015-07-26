@@ -17,6 +17,7 @@
   "license": "GPLv3",
   "devDependencies": {
     "chai": "^3.0.0",
+    "chai-spies": "^0.6.0",
     "gulp": "^3.9.0",
     "gulp-mocha": "^2.1.1",
     "mocha": "^2.2.5"

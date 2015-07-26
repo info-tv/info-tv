@@ -44,15 +44,17 @@ AbstractClockItem.prototype.getStatus = function getStatus() {
 };
 
 /**
- * Changes status to newStatus if current status is listed in allowedStatuses
- * and call callback if oldStatus doesn't match to current/updated status.
+ * Changes status to newStatus if current/previous status is listed in
+ * allowedStatuses and call callback if oldStatus doesn't match to
+ * current/updated status.
  *
- * @param {string[]} allowedStatuses - list of previous statuses that are
- * allowed to change
- * @param newStatus - new status if previous status is listen in allowedStatuses
+ * @param {string[]} allowedStatuses - list of current/previous statuses that
+ * are allowed to be changed
+ * @param newStatus - new status to change if current/previous status is listen
+ * in allowedStatuses
  * @param oldStatus - old cached status
  * @param {listenCallback} callback - called if oldStatus does not match to
- * updated status
+ * current/updated status
  * @returns {string} - current/updated status
  * @protected
  */
@@ -77,7 +79,6 @@ AbstractClockItem.prototype._changeStatusIf = function _changeStatusIf(allowedSt
  */
 AbstractClockItem.prototype._listen = function _listen(date, callback) {
   var duration = date.getTime() - Date.now();
-
   if (duration < 0) duration = 0;
 
   var self = this;
