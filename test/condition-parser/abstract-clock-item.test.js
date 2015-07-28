@@ -10,7 +10,7 @@ var $ = require('../_utils');
 // files to test
 var AbstractClockItem = require('../../src/condition-parser/abstract-clock-item');
 
-describe('condition-parser/abstract-item', function () {
+describe('condition-parser/abstract-clock-item', function () {
   it('should have right foreseen date', function () {
     var now = Date.now();
     var changingTime = Math.floor(Math.random() * 1000);
@@ -26,7 +26,7 @@ describe('condition-parser/abstract-item', function () {
       .that.eql(new Date(now - changingTime));
   });
 
-  it('should clear registered timeouts on destroy', function () {
+  it('should clear registered timeouts on destroy', function (done) {
     var spy = chai.spy();
 
     var item = new AbstractClockItem();
@@ -35,10 +35,11 @@ describe('condition-parser/abstract-item', function () {
 
     setTimeout(function () {
       expect(spy).to.have.not.been.called();
+      done();
     }, 50);
   });
 
-  it('should allow watching a clock', function () {
+  it('should allow watching a clock', function (done) {
     var spy = chai.spy();
 
     var item = new AbstractClockItem();
@@ -53,6 +54,8 @@ describe('condition-parser/abstract-item', function () {
 
       // listener is removed from array
       expect(item._timeoutIDs).to.have.length(0);
+
+      done();
     }, 50);
   });
 

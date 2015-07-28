@@ -9,6 +9,8 @@ validate.moment = require('moment');
 
 // files to test
 var AbstractItem = require('../../src/condition-parser/abstract-item');
+
+// other needed files
 var All = require('../../src/condition-parser/all');
 var Clock = require('../../src/condition-parser/clock');
 var OneOf = require('../../src/condition-parser/one-of');
@@ -16,7 +18,7 @@ var OneOf = require('../../src/condition-parser/one-of');
 describe('condition-parser/abstract-item', function () {
   it('should be able to get all valid items', function () {
     expect(function () {
-      var changingTime = 15;
+      var changingTime = Math.floor(Math.random() * 1000);
 
       var all = AbstractItem.getItem({
         childs: { all: {} },
