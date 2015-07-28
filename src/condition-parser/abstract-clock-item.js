@@ -35,15 +35,6 @@ AbstractClockItem.prototype.destroy = function destroy() {
 };
 
 /**
- * Get pre-calculated status
- *
- * @returns {string} - false, changing to true, changing to false, or true
- */
-AbstractClockItem.prototype.getStatus = function getStatus() {
-  return this.status;
-};
-
-/**
  * Changes status to newStatus if current/previous status is listed in
  * allowedStatuses and call callback if oldStatus doesn't match to
  * current/updated status.

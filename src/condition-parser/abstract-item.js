@@ -7,6 +7,7 @@
  */
 var AbstractItem = function AbstractItem(changingTime) {
   this.changingTime = changingTime || 0;
+  this.status = 'false';
 };
 
 /**
@@ -60,7 +61,7 @@ AbstractItem.getItem = function getItem(params) {
  * @returns {string} - status
  */
 AbstractItem.prototype.getStatus = function getStatus() {
-  return 'false';
+  return this.status;
 };
 
 /**

@@ -67,10 +67,4 @@ describe('condition-parser/abstract-item', function () {
       });
     }).to.throw('all[0].oneOf[0].clock');
   });
-
-  it('should have always false as status', function () {
-    var item = new AbstractItem();
-
-    expect(item.getStatus()).to.eql('false');
-  });
 });

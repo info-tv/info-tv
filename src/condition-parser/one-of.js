@@ -32,11 +32,11 @@ OneOf.prototype = _.create(AbstractGroup.prototype, { constructor: OneOf });
 OneOf.prototype.getStatus = function getStatus() {
   var values = [ 'false', 'changing to true', 'changing to false', 'true' ];
 
-  var value = _.max(this.childs, function (child) {
+  var child = _.max(this.childs, function (child) {
     return _.indexOf(values, child.getStatus());
   });
 
-  return value !== -1 ? values[value] : '';
+  return typeof child !== 'number' ? child.getStatus() : '';
 };
 
 module.exports = OneOf;
