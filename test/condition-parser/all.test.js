@@ -38,9 +38,9 @@ describe('condition-parser/all', function () {
     var now = Date.now();
 
     var all = new All('', [
-      { clock: { from:  now + 200 } },
-      { clock: { to: now + 400 } }
-    ], 100);
+      { clock: { from:  now + 50 } },
+      { clock: { to: now + 150 } }
+    ], 45);
 
     var spy = chai.spy();
 
@@ -59,16 +59,16 @@ describe('condition-parser/all', function () {
       expect(spy).to.have.been.called.exactly(4);
 
       done();
-    }, 500);
+    }, 200);
   });
 
   it('should allow multiple listeners', function (done) {
     var now = Date.now();
 
     var all = new All('', [
-      { clock: { from:  now + 200 } },
-      { clock: { to: now + 400 } }
-    ], 100);
+      { clock: { from:  now + 50 } },
+      { clock: { to: now + 150 } }
+    ], 45);
 
     var spies = [chai.spy(), chai.spy()];
 
@@ -80,6 +80,6 @@ describe('condition-parser/all', function () {
       expect(spies[1]).to.have.been.called.exactly(4);
 
       done();
-    }, 500);
+    }, 200);
   });
 });

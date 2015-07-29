@@ -29,7 +29,7 @@ describe('condition-parser/to', function () {
   it('should change its status right', function (done) {
     var now = Date.now();
 
-    var to = new To(now + 200, 100);
+    var to = new To(now + 50, 45);
 
     var spy = chai.spy();
 
@@ -48,13 +48,13 @@ describe('condition-parser/to', function () {
       expect(spy).to.have.been.called.twice();
 
       done();
-    }, 500);
+    }, 100);
   });
 
   it('should allow multiple listeners', function (done) {
     var now = Date.now();
 
-    var to = new To(now + 200, 100);
+    var to = new To(now + 50, 45);
 
     var spies = [chai.spy(), chai.spy()];
 
@@ -66,6 +66,6 @@ describe('condition-parser/to', function () {
       expect(spies[1]).to.have.been.called.twice();
 
       done();
-    }, 500);
+    }, 100);
   });
 });

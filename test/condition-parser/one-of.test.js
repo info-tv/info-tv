@@ -38,9 +38,9 @@ describe('condition-parser/one-of', function () {
     var now = Date.now();
 
     var oneOf = new OneOf('', [
-      { clock: { to:  now + 200 } },
-      { clock: { from: now + 400 } }
-    ], 100);
+      { clock: { to:  now + 50 } },
+      { clock: { from: now + 150 } }
+    ], 45);
 
     var spy = chai.spy();
 
@@ -59,16 +59,16 @@ describe('condition-parser/one-of', function () {
       expect(spy).to.have.been.called.exactly(4);
 
       done();
-    }, 500);
+    }, 200);
   });
 
   it('should allow multiple listeners', function (done) {
     var now = Date.now();
 
     var oneOf = new OneOf('', [
-      { clock: { to:  now + 200 } },
-      { clock: { from: now + 400 } }
-    ], 100);
+      { clock: { to:  now + 50 } },
+      { clock: { from: now + 150 } }
+    ], 45);
 
     var spies = [chai.spy(), chai.spy()];
 
@@ -80,6 +80,6 @@ describe('condition-parser/one-of', function () {
       expect(spies[1]).to.have.been.called.exactly(4);
 
       done();
-    }, 500);
+    }, 200);
   });
 });
