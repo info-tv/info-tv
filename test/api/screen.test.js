@@ -43,12 +43,10 @@ describe('api/screen', function () {
   });
 
   it('should create resource', function () {
-    var fn = function () { return _.get(api, '_router.stack') }
-
     var resource = getScreenResource(epilogue, sequelize);
 
     // assert resource is defined
-    expect(fn()).to.be.an('array');
+    expect(resource).to.be.an.instanceof(Epilogue.Resource);
   });
 
   it('should cache the resource', function () {
@@ -58,8 +56,6 @@ describe('api/screen', function () {
     // assert new resource is old resource
     expect(newResource).to.be.equal(oldResource);
   });
-
-
 
   it('should be mounted to /screens[/:id]', function () {
     var resource = getScreenResource(epilogue, sequelize);

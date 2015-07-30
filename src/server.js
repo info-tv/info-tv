@@ -46,6 +46,6 @@ var createServer = function createServer(callback) {
   });
 
   return server;
-}
+};
 
 module.exports = createServer;

@@ -1,6 +1,7 @@
 /**
  * Create and cache Sequelize model
  *
+ * @param {object} options
  * @param {Sequelize} options.sequelize - Sequelize instance to use as ORM
  * @param {string} options.modelName - Name of model
  * @param {object} options.attributes - Attributes of model passed to

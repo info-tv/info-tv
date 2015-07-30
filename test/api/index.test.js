@@ -32,7 +32,7 @@ describe('api', function () {
   });
 
   it('should create api', function () {
-    var fn = function () { return _.get(app, '_router.stack') }
+    var fn = function () { return _.get(app, '_router.stack') };
 
     var api = getAPI(app, sequelize);
 

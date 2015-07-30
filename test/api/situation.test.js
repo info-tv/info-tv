@@ -43,12 +43,10 @@ describe('api/situation', function () {
   });
 
   it('should create resource', function () {
-    var fn = function () { return _.get(api, '_router.stack') }
-
     var resource = getSituationResource(epilogue, sequelize);
 
     // assert resource is defined
-    expect(fn()).to.be.an('array');
+    expect(resource).to.be.an.instanceof(Epilogue.Resource);
   });
 
   it('should cache the resource', function () {

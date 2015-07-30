@@ -23,13 +23,11 @@ describe('api/utils', function () {
       var values = [ 'false', '{}', '{"value": 1}' ];
 
       _(values).each(function(value) {
-        var fn = function () { return validate.validators.JSON(value) };
+        expect(function () {
+          var error = validate.validators.JSON(value);
 
-        // assert fn don't throw an error
-        expect(fn).to.not.throw(Error);
-
-        // assert fn return nothing
-        expect(fn()).to.be.an('undefined');
+          expect(error).to.be.an('undefined');
+        }).to.not.throw();
       });
     });
 
@@ -37,13 +35,11 @@ describe('api/utils', function () {
       var values = [ '', 'asdf', 'false, true', '{]', '{value: 1}' ];
 
       _(values).each(function(value) {
-        var fn = function () { return validate.validators.JSON(value) };
+        expect(function () {
+          var error = validate.validators.JSON(value);
 
-        // assert fn don't throw an error
-        expect(fn).to.not.throw(Error);
-
-        // assert fn returns string
-        expect(fn()).to.be.an('string');
+          expect(error).to.be.an('string');
+        }).to.not.throw();
       });
     });
   });
@@ -52,12 +48,31 @@ describe('api/utils', function () {
     it('should be defined', function () {
       var validator = validate.validators.condition;
 
-      // assert validator is function
       expect(validator).to.be.a('function');
     });
 
-    //it('should use condition parser', $.todo);
-    //it('should accept valid condition', $.todo);
-    //it('should not accept invalid condition', $.todo);
+    it('should accept valid condition', function () {
+      var values = [ { all: {}}, '{"all":{}}' ];
+
+      _(values).each(function(value) {
+        expect(function () {
+          var error = validate.validators.condition(value);
+
+          expect(error).to.not.exist;
+        }).to.not.throw();
+      });
+    });
+
+    it('should not accept invalid condition', function () {
+      var values = [ undefined, 'invalid condition', { invalidCondition: {}} ];
+
+      _(values).each(function(value) {
+        expect(function () {
+          var error = validate.validators.condition(value);
+
+          expect(error).to.be.an('string');
+        }).to.not.throw();
+      });
+    });
   });
 });

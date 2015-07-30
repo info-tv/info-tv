@@ -21,16 +21,13 @@ describe('models/screen', function () {
   });
 
   it('should create database model', function () {
-    var fn = function () { return sequelize.model('Screen'); }
+    expect(function () {
+      expect(sequelize.isDefined('Screen')).to.be.false;
 
-    // assert model is not defined
-    expect(sequelize.isDefined('Screen')).to.be.false;
+      var model = getScreenModel(sequelize);
 
-    var model = getScreenModel(sequelize);
-
-    // assert model is defined
-    expect(fn).to.not.throw(Error);
-    expect(model).to.be.equal(fn());
+      expect(model).to.be.equal(sequelize.model('Screen'));
+    }).to.not.throw();
   });
 
   it('should cache the database model', function () {
@@ -40,4 +37,7 @@ describe('models/screen', function () {
     // assert new model is old model
     expect(newModel).to.be.equal(oldModel);
   });
+
+  // it should have relation to situation
+  // it should have relation to content through situation
 });

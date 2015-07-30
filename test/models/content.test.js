@@ -21,18 +21,15 @@ describe('models/content', function () {
   });
 
   it('should create database model', function () {
-    var fn = function () { return sequelize.model('Content'); }
+    expect(function() {
+      expect(sequelize.isDefined('Content')).to.be.false;
 
-    // assert model is not defined
-    expect(sequelize.isDefined('Content')).to.be.false;
+      var model = getContentModel(sequelize);
 
-    var model = getContentModel(sequelize);
-
-    // assert model is defined
-    expect(fn).to.not.throw(Error);
-    expect(model).to.be.equal(fn());
-
+      expect(model).to.be.equal(sequelize.model('Content'));
+    }).to.not.throw();
   });
+
   it('should cache the database model', function () {
     var oldModel = getContentModel(sequelize);
     var newModel = getContentModel(sequelize);
@@ -40,6 +37,7 @@ describe('models/content', function () {
     // assert new model is old model
     expect(newModel).to.be.equal(oldModel);
   });
+
   it('should have right fields', function () {
     var Content = getContentModel(sequelize);
     var content = Content.build();
@@ -47,6 +45,9 @@ describe('models/content', function () {
     // assert content has type field
     expect(content.dataValues).to.include.all.keys('type');
   });
+
+  // it should have relation to situation
+  // it should have relation to screen through situation
 });
 
 

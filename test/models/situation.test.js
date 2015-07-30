@@ -21,16 +21,13 @@ describe('models/situation', function () {
   });
 
   it('should create database model', function () {
-    var fn = function () { return sequelize.model('Situation'); }
+    expect(function () {
+      expect(sequelize.isDefined('Situation')).to.be.false;
 
-    // assert model is not defined
-    expect(sequelize.isDefined('Situation')).to.be.false;
+      var model = getSituationModel(sequelize);
 
-    var model = getSituationModel(sequelize);
-
-    // assert model is defined
-    expect(fn).to.not.throw(Error);
-    expect(model).to.be.equal(fn());
+      expect(model).to.be.equal(sequelize.model('Situation'));
+    }).to.not.throw();
   });
 
   it('should cache the database model', function () {
@@ -48,4 +45,7 @@ describe('models/situation', function () {
     // assert situation has condition, changingTime, and status fields
     expect(situation.dataValues).to.include.all.keys('condition', 'changingTime', 'status');
   });
+
+  // it should have relation to content
+  // it should have relation to screen
 });
