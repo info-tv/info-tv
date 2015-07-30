@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var validate = require('validate.js');
+
 var AbstractItem = require('./abstract-item');
 var From = require('./from');
 var To = require('./to');
