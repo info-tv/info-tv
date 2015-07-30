@@ -1,9 +1,8 @@
-var expect = require('chai').expect;
 var Sequelize = require('sequelize');
 _ = require('lodash');
 
 var chai = require('chai');
-chai.use(require('chai-spies'));
+var expect = chai.expect;
 
 var $ = require('../_utils');
 

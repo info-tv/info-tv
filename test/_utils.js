@@ -137,6 +137,10 @@ function combinations(set) {
 
 // -----------------------------------------------------------------------------
 
+/**
+ *
+ * @module
+ */
 module.exports = {
   // run 'env INGORE_TODOS=1 mocha test/* test/**/*' to disable
   // usage: it('...', $.todo) where $ = require('path/to/_utils')
@@ -148,3 +152,11 @@ module.exports = {
 
   combinations: combinations
 };
+
+// inject chai with spies
+var chai = require('chai');
+chai.use(require('chai-spies'));
+
+// inject validate with moment
+var validate = require('validate.js');
+validate.moment = require('moment');

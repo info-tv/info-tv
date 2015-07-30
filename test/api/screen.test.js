@@ -1,8 +1,11 @@
 var Epilogue = require('epilogue');
-var expect = require('chai').expect;
 var express = require('express');
 var Sequelize = require('sequelize');
 _ = require('lodash');
+
+var chai = require('chai');
+var expect = chai.expect;
+
 var $ = require('../_utils');
 
 // files to test

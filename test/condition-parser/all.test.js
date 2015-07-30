@@ -1,14 +1,11 @@
-var expect = require('chai').expect;
 var Sequelize = require('sequelize');
+var validate = require('validate.js');
 _ = require('lodash');
 
-var $ = require('../_utils');
-
 var chai = require('chai');
-chai.use(require('chai-spies'));
+var expect = chai.expect;
 
-var validate = require('validate.js');
-validate.moment = require('moment');
+var $ = require('../_utils');
 
 // files to test
 var All = require('../../src/condition-parser/all');

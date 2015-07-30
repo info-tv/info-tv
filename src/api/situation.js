@@ -1,4 +1,5 @@
 var memoize = require('memoizee');
+
 var getResource = require('./abstract-resource');
 var getSituationModel = require('../models/situation');
 var conditionParser = require('../condition-parser');

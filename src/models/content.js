@@ -1,4 +1,5 @@
 var Sequelize = require('sequelize');
+
 var getModel = require('./abstract-model');
 
 /**

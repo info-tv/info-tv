@@ -1,4 +1,5 @@
 var memoize = require('memoizee');
+
 var getResource = require('./abstract-resource');
 var getContentModel = require('../models/content');
 

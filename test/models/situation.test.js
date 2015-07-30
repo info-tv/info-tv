@@ -1,6 +1,9 @@
-var expect = require('chai').expect;
 var Sequelize = require('sequelize');
 _ = require('lodash');
+
+var chai = require('chai');
+var expect = chai.expect;
+
 var $ = require('../_utils');
 
 // files to test

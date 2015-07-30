@@ -1,6 +1,8 @@
-var expect = require('chai').expect;
 _ = require('lodash');
 var $ = require('../_utils');
+
+var chai = require('chai');
+var expect = chai.expect;
 
 // files to test
 var config = require('../../src/config/config.json');
