@@ -1,30 +1,36 @@
-var _ = require('lodash');
+var fs = require('fs');
+var path = require('path');
+var Sequelize = require('sequelize');
 
-var paths = {
-  Content:   './content',
-  Screen:    './screen',
-  Situation: './situation'
-};
+var basename = path.basename(module.filename);
+var env = process.env.NODE_ENV || 'development';
+var config = require(__dirname + '/../../config/config.json')[env];
 
-/**
- * Load and cache Sequelize models. Load them from other files in this
- * directory.
- *
- * @example
- * var ContentModel = getModels().Content;
- *
- * @param {Sequelize} sequelize - Sequelize instance to use as ORM
- * @returns {Object} - Object containing created (or cached) models with their
- *                     names.
- */
-var getModels = function(sequelize) {
-  var models = {};
+var sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  config
+);
+var db = {};
 
-  _.each(paths, function (path, name) {
-    models[name] = require(path)(sequelize);
+fs
+  .readdirSync(__dirname)
+  .filter(function (file) {
+    return /^[^._].+\.js$/.test(file) && (file !== basename);
+  })
+  .forEach(function (file) {
+    if (file.slice(-3) !== '.js') return;
+    var model = sequelize['import'](path.join(__dirname, file));
+    db[model.name] = model;
   });
 
-  return models;
-};
+Object.keys(db).forEach(function (modelName) {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
 
-module.exports = getModels;
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+module.exports = db;

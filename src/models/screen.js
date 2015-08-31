@@ -1,27 +1,53 @@
-var Sequelize = require('sequelize');
+var _ = require('lodash');
 
-var getModel = require('./abstract-model');
+var Layout = require('./_layout');
+var MonitorSize = require('./_monitor-size');
+var Nameable = require('./_nameable');
 
-/**
- * Create and cache Sequelize model
- *
- * @param {Sequelize} sequelize - Sequelize instance to use as ORM
- * @returns {Sequelize.Model} - Created (or cached) model
- */
-var getScreenModel = function getScreenModel(sequelize) {
-  return getModel({
-    sequelize: sequelize,
-    modelName: 'Screen',
-    attributes: {}
-  }, function addRelations(Screen) {
-    var Situation = require('./situation')(sequelize);
+module.exports = function (sequelize, DataTypes) {
+  var Screen = sequelize.define('Screen', _.extend({},
+    Layout.attributes,
+    MonitorSize.attributes,
+    Nameable.attributes
+  ), {
+    classMethods: {
+      associate: function (models) {
+        Screen.belongsTo(models['Object']);
+        Screen.hasMany(models['Display']);
+      },
 
-    Screen.belongsToMany(Situation, {
-      through: 'ScreensSituations',
-      onDelete: 'SET NULL',
-      onUpdate: 'CASCADE'
-    });
+      /**
+       * Get default values for each attributes
+       *
+       * @returns {Object}
+       */
+      defaultValues: function () {
+        return _.extend({},
+          Layout.defaultValues(),
+          MonitorSize.defaultValues(),
+          Nameable.defaultValues()
+        );
+      }
+    },
+
+    hooks: {
+      /**
+       * Auto-create object for any created screen
+       *
+       * @param instance
+       * @returns {Promise}
+       */
+      beforeCreate: function (instance) {
+        var Object = sequelize.model('Object');
+
+        return Object.create({
+          kind: Screen
+        }).then(function (object) {
+          instance.ObjectId = object.id;
+        });
+      }
+    }
   });
-};
 
-module.exports = getScreenModel;
+  return Screen;
+};

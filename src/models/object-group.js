@@ -1,15 +1,18 @@
-var Sequelize = require('sequelize');
 var _ = require('lodash');
 
-var Extendable = require('./_extendable');
+var Nameable = require('./_nameable');
 
 module.exports = function (sequelize, DataTypes) {
-  var Content = sequelize.define('Content', _.extend({},
-    Extendable.attributes(sequelize)
+  var ObjectGroup = sequelize.define('ObjectGroup', _.extend({},
+    Nameable.attributes
   ), {
     classMethods: {
       associate: function (models) {
-        Content.belongsTo(models['Object']);
+        ObjectGroup.belongsTo(models['Object']);
+        ObjectGroup.belongsToMany(models['Object'], {
+          as: 'Members',
+          through: 'ObjectGroupMembers'
+        });
       },
 
       /**
@@ -18,13 +21,15 @@ module.exports = function (sequelize, DataTypes) {
        * @returns {Object}
        */
       defaultValues: function () {
-        return {};
+        return _.extend({},
+          Nameable.defaultValues()
+        );
       }
     },
 
     hooks: {
       /**
-       * Auto-create object for any created content
+       * Auto-create object for any created object group
        *
        * @param instance
        * @returns {Promise}
@@ -33,7 +38,7 @@ module.exports = function (sequelize, DataTypes) {
         var Object = sequelize.model('Object');
 
         return Object.create({
-          kind: Content
+          kind: ObjectGroup
         }).then(function (object) {
           instance.ObjectId = object.id;
         });
@@ -41,5 +46,5 @@ module.exports = function (sequelize, DataTypes) {
     }
   });
 
-  return Content;
+  return ObjectGroup;
 };

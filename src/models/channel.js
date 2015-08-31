@@ -1,15 +1,16 @@
-var Sequelize = require('sequelize');
 var _ = require('lodash');
 
-var Extendable = require('./_extendable');
+var Layout = require('./_layout');
+var Nameable = require('./_nameable');
 
 module.exports = function (sequelize, DataTypes) {
-  var Content = sequelize.define('Content', _.extend({},
-    Extendable.attributes(sequelize)
+  var Channel = sequelize.define('Channel', _.extend({},
+    Layout.attributes,
+    Nameable.attributes
   ), {
     classMethods: {
       associate: function (models) {
-        Content.belongsTo(models['Object']);
+        Channel.belongsTo(models['Object']);
       },
 
       /**
@@ -18,13 +19,16 @@ module.exports = function (sequelize, DataTypes) {
        * @returns {Object}
        */
       defaultValues: function () {
-        return {};
+        return _.extend({},
+          Layout.defaultValues(),
+          Nameable.defaultValues()
+        );
       }
     },
 
     hooks: {
       /**
-       * Auto-create object for any created content
+       * Auto-create object for any created channel
        *
        * @param instance
        * @returns {Promise}
@@ -33,7 +37,7 @@ module.exports = function (sequelize, DataTypes) {
         var Object = sequelize.model('Object');
 
         return Object.create({
-          kind: Content
+          kind: Channel
         }).then(function (object) {
           instance.ObjectId = object.id;
         });
@@ -41,5 +45,5 @@ module.exports = function (sequelize, DataTypes) {
     }
   });
 
-  return Content;
+  return Channel;
 };
