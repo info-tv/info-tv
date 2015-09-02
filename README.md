@@ -1,5 +1,9 @@
 # info-tv
-_Node.js powered Digital Signage System_
+
+[![Build Status](https://travis-ci.org/info-tv/info-tv.svg)]
+(https://travis-ci.org/info-tv/info-tv)
+
+> _Node.js powered Digital Signage System_
 
 Currently, this software is in **VERY EARLY STAGE**. It is not good idea to use
 this software as your production digital signage system right now. Until it
