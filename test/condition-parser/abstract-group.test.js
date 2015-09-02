@@ -61,7 +61,7 @@ describe('condition-parser/abstract-group', function () {
     }).to.throw();
   });
 
-  it('it should destroy all childs on destroy', function () {
+  it('should destroy all childs on destroy', function () {
     var spyItem = chai.spy.object(['destroy']);
 
     var group = new AbstractGroup('', []);

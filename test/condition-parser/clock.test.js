@@ -56,14 +56,6 @@ describe('condition-parser/clock', function () {
     }).to.throw();
   });
 
-  it('', function () {
-
-  });
-
-  it('', function () {
-
-  });
-
   it('should change its status right', function (done) {
     var now = Date.now();
 
