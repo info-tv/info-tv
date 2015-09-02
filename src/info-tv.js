@@ -18,11 +18,6 @@ new Router(
   true
 );
 
-// finally serve public folder as is
-server.get(/.*/, restify.serveStatic({
-  directory: path.join(__dirname + '/public')
-}));
-
 server.listen(8080, function () {
   sequelize.sync().then(function () {
     var host = server.address().address;
