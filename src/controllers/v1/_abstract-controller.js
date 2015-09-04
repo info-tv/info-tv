@@ -2,6 +2,45 @@ var restify = require('restify');
 var Sequelize = require('sequelize');
 var _ = require('lodash');
 
+/**
+ * @apiDefine 400BadRequest
+ *
+ * @apiError (4xx) 400 Bad Request
+ *
+ * @apiErrorExample {json} 400 Bad Request
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "code": "BadRequest",
+ *       "message": "Validation failed"
+ *     }
+ */
+
+/**
+ * @apiDefine 404NotFound
+ *
+ * @apiError (4xx) 404 Not Found
+ *
+ * @apiErrorExample {json} 404 Not Found
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "code": "NotFoundError",
+ *       "message": ""
+ *     }
+ */
+
+/**
+ * @apiDefine 500InternalServerError
+ *
+ * @apiError (5xx) 500 Internal Server Error
+ *
+ * @apiErrorExample {json} 500 Internal Server Error
+ *     HTTP/1.1 500 Internal Server Error
+ *     {
+ *       "code": "InternalError",
+ *       "message": ""
+ *     }
+ */
+
 module.exports = {
   before: [
     {name: 'findById', only: ['show', 'update', 'destroy']}
