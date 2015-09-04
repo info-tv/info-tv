@@ -11,7 +11,7 @@ module.exports = {
   findById: AbstractController.findById.bind(this, Screen),
 
   /**
-   * @api {get} /api/v1/screens List screens
+   * @api {get} /api/v1/screens 1 - List screens
    * @apiName GetScreens
    * @apiGroup Screen
    * @apiVersion 0.1.0
@@ -55,8 +55,8 @@ module.exports = {
   index: AbstractController.index.bind(this, Screen),
 
   /**
-   * @api {post} /api/v1/screens Create screen
-   * @apiName PostScreen
+   * @api {post} /api/v1/screens 2 - Create screen
+   * @apiName PostScreens
    * @apiGroup Screen
    * @apiVersion 0.1.0
    *
@@ -69,7 +69,7 @@ module.exports = {
    * @apiParam {Number} [height_px=0] Screen height in pixels
    * @apiParam {Object} [layout={}]   Layout and style of the screen in String/JSON format
    *
-   * @apiSuccess (201) {Number} id    Screen ID
+   * @apiSuccess (201)  {Number} id   Screen ID
    *
    * @apiSuccessExample {json} 201 Created
    *     POST /api/v1/screens HTTP/1.1
@@ -93,7 +93,7 @@ module.exports = {
   create: AbstractController.create.bind(this, Screen),
 
   /**
-   * @api {get} /api/v1/screens/:id Get screen
+   * @api {get} /api/v1/screens/:id 3 - Get screen
    * @apiName GetScreen
    * @apiGroup Screen
    * @apiVersion 0.1.0
@@ -130,14 +130,13 @@ module.exports = {
    *       "updatedAt": "2015-08-31T14:35:21.202Z"
    *     }
    *
-   *
    * @apiUse 404NotFound
    * @apiUse 500InternalServerError
    */
   show: AbstractController.show.bind(this, Screen),
 
   /**
-   * @api {put} /api/v1/screens/:id Replace screen
+   * @api {put} /api/v1/screens/:id 4 - Replace screen
    * @apiName PutScreen
    * @apiGroup Screen
    * @apiVersion 0.1.0
@@ -151,10 +150,10 @@ module.exports = {
    * @apiParam {Number} [height_px=0] Screen height in pixels
    * @apiParam {Object} [layout={}]   Layout and style of the screen in String/JSON format
    *
-   * @apiSuccess (201) {Number} id    Screen ID
+   * @apiSuccess (200) {Number} id    Screen ID
    *
-   * @apiSuccessExample {json} 201 Created
-   *     POST /api/v1/screens HTTP/1.1
+   * @apiSuccessExample {json} 201 OK
+   *     PUT /api/v1/screens/3 HTTP/1.1
    *     {
    *       "width_mm": 200,
    *       "height_mm": 113,
@@ -166,8 +165,21 @@ module.exports = {
    *       "layout": {}
    *     }
    *
-   *     HTTP/1.1 201 Created
-   *     Location: /api/v1/screens/3
+   *     HTTP/1.1 200 OK
+   *     {
+   *       "ObjectId": 12,
+   *       "id": 3,
+   *       "width_mm": 200,
+   *       "height_mm": 113,
+   *       "width_px": 1920,
+   *       "height_px": 1080,
+   *       "name": "SD3",
+   *       "description": "Lorem ipsum dolor sit amet...",
+   *       "location": "Stage D",
+   *       "layout": {},
+   *       "createdAt": "2015-08-31T14:35:21.202Z",
+   *       "updatedAt": "2015-08-31T14:35:21.202Z"
+   *     }
    *
    * @apiUse 400BadRequest
    * @apiUse 404NotFound
@@ -176,7 +188,7 @@ module.exports = {
   update: AbstractController.update.bind(this, Screen),
 
   /**
-   * @api {delete} /api/v1/screens/:id Delete screen
+   * @api {delete} /api/v1/screens/:id 5 - Delete screen
    * @apiName DeleteScreen
    * @apiGroup Screen
    * @apiVersion 0.1.0

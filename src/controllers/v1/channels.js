@@ -8,57 +8,163 @@ var Channel = models['Channel'];
 module.exports = {
   before: AbstractController.before,
 
-  /**
-   * Find Channel where id = req.params.id and store it to req.instance
-   *
-   * 404 Not Found             - if instance was not found
-   * 500 Internal Server Error - if there was any other problems
-   */
   findById: AbstractController.findById.bind(this, Channel),
 
   /**
-   * GET /api/v1/channels
+   * @api {get} /api/v1/channels 1 - List channels
+   * @apiName GetChannels
+   * @apiGroup Channel
+   * @apiVersion 0.1.0
    *
-   * 200 OK                    - if there was no problems
-   * 500 Internal Server Error - if there was any problems
+   * @apiSuccess (200) {Object[]} channels               List of channels
+   * @apiSuccess (200) {Number}   channels.ObjectId      Object id of channel
+   * @apiSuccess (200) {Number}   channels.id            Channel ID
+   * @apiSuccess (200) {String}   [channels.name]        Channel name
+   * @apiSuccess (200) {String}   [channels.description] Channel description
+   * @apiSuccess (200) {String}   [channels.location]    Physical or logical location of the channel
+   * @apiSuccess (200) {Object}   [channels.layout={}]   Layout and style of the channel in String/JSON format
+   * @apiSuccess (200) {String}   channels.createdAt     Timestamp of creation in ISO format
+   * @apiSuccess (200) {String}   channels.updatedAt     Timestamp of latest update in ISO format
+   *
+   * @apiSuccessExample {json} 200 OK
+   *     HTTP/1.1 200 OK
+   *     [
+   *       {
+   *         "ObjectId": 4,
+   *         "id": 3,
+   *         "name": "MWC-16",
+   *         "description": "Mobile World Conference 2016",
+   *         "location": "Barcelona",
+   *         "layout": {},
+   *         "createdAt": "2015-08-31T14:35:21.202Z",
+   *         "updatedAt": "2015-08-31T14:35:21.202Z"
+   *       }
+   *     ]
+   *
+   * @apiUse 500InternalServerError
    */
   index: AbstractController.index.bind(this, Channel),
 
   /**
-   * POST /api/v1/channels
+   * @api {post} /api/v1/channels 2 - Create channel
+   * @apiName PostChannels
+   * @apiGroup Channel
+   * @apiVersion 0.1.0
    *
-   * 201 Created with no content - if Channel was created
-   * - Location: url for the created Channel
-   * 400 Bad Request             - if validation failed
-   * 500 Internal Server Error   - if there was any other problems
+   * @apiParam {String} [name]        Channel name
+   * @apiParam {String} [description] Channel description
+   * @apiParam {String} [location]    Physical or logical location of the channel
+   * @apiParam {Object} [layout={}]   Layout and style of the channel in String/JSON format
+   *
+   * @apiSuccess (201)  {Number} id   Channel ID
+   *
+   * @apiSuccessExample {json} 201 Created
+   *     POST /api/v1/channels HTTP/1.1
+   *     {
+   *       "name": "MWC-2016",
+   *       "description": "Mobile World Conference 2016",
+   *       "location": "Barcelona",
+   *       "layout": {}
+   *     }
+   *
+   *     HTTP/1.1 201 Created
+   *     Location: /api/v1/channels/3
+   *
+   * @apiUse 400BadRequest
+   * @apiUse 500InternalServerError
    */
   create: AbstractController.create.bind(this, Channel),
 
   /**
-   * GET /api/v1/channels/:id
+   * @api {get} /api/v1/channels/:id 3 - Get channel
+   * @apiName GetChannel
+   * @apiGroup Channel
+   * @apiVersion 0.1.0
    *
-   * 200 OK                    - if Channel was found
-   * 404 Not Found             - if Channel was not found
-   * 500 Internal Server Error - if there was any other problems
+   * @apiParam         {Number} id            Channel ID
+   *
+   * @apiSuccess (200) {Number} ObjectId      Object id of channel
+   * @apiSuccess (200) {Number} id            Channel ID
+   * @apiSuccess (200) {String} [name]        Channel name
+   * @apiSuccess (200) {String} [description] Channel description
+   * @apiSuccess (200) {String} [location]    Physical or logical location of the channel
+   * @apiSuccess (200) {Object} [layout={}]   Layout and style of the channel in String/JSON format
+   * @apiSuccess (200) {String} createdAt     Timestamp of creation in ISO format
+   * @apiSuccess (200) {String} updatedAt     Timestamp of latest update in ISO format
+   *
+   * @apiSuccessExample {json} 200 OK
+   *     HTTP/1.1 200 OK
+   *     {
+   *       "ObjectId": 4,
+   *       "id": 3,
+   *       "name": "MWC-16",
+   *       "description": "Mobile World Conference 2016",
+   *       "location": "Barcelona",
+   *       "layout": {},
+   *       "createdAt": "2015-08-31T14:35:21.202Z",
+   *       "updatedAt": "2015-08-31T14:35:21.202Z"
+   *     }
+   *
+   * @apiUse 404NotFound
+   * @apiUse 500InternalServerError
    */
   show: AbstractController.show.bind(this, Channel),
 
   /**
-   * PUT /api/v1/channels/:id
+   * @api {put} /api/v1/channels/:id 4 - Replace channel
+   * @apiName PutChannel
+   * @apiGroup Channel
+   * @apiVersion 0.1.0
    *
-   * 200 OK                    - if Channel was updated
-   * 400 Bad Request           - if validation failed
-   * 404 Not Found             - if Channel was not found
-   * 500 Internal Server Error - if there was any other problems
+   * @apiParam {String} [name]        Channel name
+   * @apiParam {String} [description] Channel description
+   * @apiParam {String} [location]    Physical or logical location of the channel
+   * @apiParam {Object} [layout={}]   Layout and style of the channel in String/JSON format
+   *
+   * @apiSuccess (200) {Number} id    Channel ID
+   *
+   * @apiSuccessExample {json} 201 OK
+   *     PUT /api/v1/channels/3 HTTP/1.1
+   *     {
+   *       "name": "MWC-16",
+   *       "description": "Mobile World Conference 2016",
+   *       "location": "Barcelona",
+   *       "layout": {}
+   *     }
+   *
+   *     HTTP/1.1 200 OK
+   *     {
+   *       "ObjectId": 4,
+   *       "id": 3,
+   *       "name": "MWC-16",
+   *       "description": "Mobile World Conference 2016",
+   *       "location": "Barcelona",
+   *       "layout": {},
+   *       "createdAt": "2015-08-31T14:35:21.202Z",
+   *       "updatedAt": "2015-08-31T14:35:21.202Z"
+   *     }
+   *
+   * @apiUse 400BadRequest
+   * @apiUse 404NotFound
+   * @apiUse 500InternalServerError
    */
   update: AbstractController.update.bind(this, Channel),
 
   /**
-   * DELETE /api/v1/channels/:id
+   * @api {delete} /api/v1/channels/:id 5 - Delete channel
+   * @apiName DeleteChannel
+   * @apiGroup Channel
+   * @apiVersion 0.1.0
    *
-   * 204 No Content            - if Channel was destroyed
-   * 404 Not Found             - if Channel was not found
-   * 500 Internal Server Error - if there was any other problems
+   * @apiParam {Number} id Channel ID
+   *
+   * @apiSuccess (2xx) 204 No Content
+   *
+   * @apiSuccessExample {json} 204 No Content
+   *     HTTP/1.1 204 No Content
+   *
+   * @apiUse 404NotFound
+   * @apiUse 500InternalServerError
    */
   destroy: AbstractController.destroy.bind(this, Channel)
 };
