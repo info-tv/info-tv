@@ -512,7 +512,7 @@ define({ "api": [
   {
     "type": "delete",
     "url": "/api/v1/contents/:id",
-    "title": "5 - Delete content",
+    "title": "3 - Delete content",
     "name": "DeleteContent",
     "group": "Content",
     "version": "0.1.0",
@@ -586,7 +586,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/api/v1/contents/:id",
-    "title": "3 - Get content",
+    "title": "2 - Get content",
     "name": "GetContent",
     "group": "Content",
     "version": "0.1.0",
@@ -1390,9 +1390,9 @@ define({ "api": [
     },
     "success": {
       "fields": {
-        "201": [
+        "200": [
           {
-            "group": "201",
+            "group": "200",
             "type": "<p>Number</p> ",
             "optional": false,
             "field": "id",
@@ -1402,14 +1402,739 @@ define({ "api": [
       },
       "examples": [
         {
-          "title": "201 Created",
-          "content": "POST /api/v1/screens HTTP/1.1\n{\n  \"width_mm\": 200,\n  \"height_mm\": 113,\n  \"width_px\": 1920,\n  \"height_px\": 1080,\n  \"name\": \"SD3\",\n  \"description\": \"Lorem ipsum dolor sit amet...\",\n  \"location\": \"Stage D\",\n  \"layout\": {}\n}\n\nHTTP/1.1 201 Created\nLocation: /api/v1/screens/3",
+          "title": "200 OK",
+          "content": "PUT /api/v1/displays/5 HTTP/1.1\n{\n  \"name\": \"RPI3\",\n  \"description\": \"Lorem ipsum dolor sit amet...\",\n  \"location\": \"Stage D\",\n  \"width_mm\": 200,\n  \"height_mm\": 113,\n  \"width_px\": 1920,\n  \"height_px\": 1080,\n  \"x\": 0,\n  \"y\": 0,\n  \"ssh\": \"ssh://192.168.4.15\",\n  \"public_key\": \"ssh-rsa AAAAB3...YPkgJD pi@192.168.4.15\",\n  \"ScreenId\": 3\n}\n\nHTTP/1.1 200 OK\n{\n  \"id\": 5,\n  \"name\": \"RPI3\",\n  \"description\": \"Lorem ipsum dolor sit amet...\",\n  \"location\": \"Stage D\",\n  \"width_mm\": 200,\n  \"height_mm\": 113,\n  \"width_px\": 1920,\n  \"height_px\": 1080,\n  \"x\": 0,\n  \"y\": 0,\n  \"ssh\": \"ssh://192.168.4.15\",\n  \"public_key\": \"ssh-rsa AAAAB3...YPkgJD pi@192.168.4.15\",\n  \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n  \"updatedAt\": \"2015-08-31T14:35:21.202Z\",\n  \"ScreenId\": 3\n}",
           "type": "json"
         }
       ]
     },
     "filename": "src/controllers/v1/displays.js",
     "groupTitle": "Display",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p>Bad Request</p> "
+          },
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"code\": \"BadRequest\",\n  \"message\": \"Validation failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/api/v1/objects/:id",
+    "title": "3 - Delete object",
+    "name": "DeleteObject",
+    "group": "Object",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Object ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "2xx": [
+          {
+            "group": "2xx",
+            "optional": false,
+            "field": "204",
+            "description": "<p>No Object</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "204 No Object",
+          "content": "HTTP/1.1 204 No Object",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/objects.js",
+    "groupTitle": "Object",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/objects/:id",
+    "title": "2 - Get object",
+    "name": "GetObject",
+    "group": "Object",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Object ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Object ID</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "kind",
+            "description": "<p>Table name of the real object</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Timestamp of creation in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Timestamp of latest update in ISO format</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": 18,\n  \"kind\": \"Content\",\n  \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n  \"updatedAt\": \"2015-08-31T14:35:21.202Z\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/objects.js",
+    "groupTitle": "Object",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/objects",
+    "title": "1 - List objects",
+    "name": "GetObjects",
+    "group": "Object",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "objects",
+            "description": "<p>List of objects</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "objects.id",
+            "description": "<p>Object ID</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "objects.kind",
+            "description": "<p>Table name of the real object</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "objects.createdAt",
+            "description": "<p>Timestamp of creation in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "objects.updatedAt",
+            "description": "<p>Timestamp of latest update in ISO format</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "200 OK",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n    \"id\": 18,\n    \"kind\": \"Content\",\n    \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n    \"updatedAt\": \"2015-08-31T14:35:21.202Z\"\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/objects.js",
+    "groupTitle": "Object",
+    "error": {
+      "fields": {
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/api/v1/object-groups/:id",
+    "title": "5 - Delete object group",
+    "name": "DeleteObjectGroup",
+    "group": "Object_Group",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Object group ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "2xx": [
+          {
+            "group": "2xx",
+            "optional": false,
+            "field": "204",
+            "description": "<p>No Content</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "204 No Content",
+          "content": "HTTP/1.1 204 No Content",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/object-groups.js",
+    "groupTitle": "Object_Group",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/object-groups/:id",
+    "title": "3 - Get object group",
+    "name": "GetObjectGroup",
+    "group": "Object_Group",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Object group ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "ObjectId",
+            "description": "<p>Object id of object group</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Object group ID</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Object group name</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Object group description</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "location",
+            "description": "<p>Physical or logical location of the object group</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Timestamp of creation in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Timestamp of latest update in ISO format</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n  \"ObjectId\": 13,\n  \"id\": 3,\n  \"name\": \"Spanish\",\n  \"description\": \"Spanish channels\",\n  \"location\": \"Spain\",\n  \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n  \"updatedAt\": \"2015-08-31T14:35:21.202Z\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/object-groups.js",
+    "groupTitle": "Object_Group",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/object-groups",
+    "title": "1 - List object groups",
+    "name": "GetObjectGroups",
+    "group": "Object_Group",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "object-groups",
+            "description": "<p>List of object groups</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "object-groups.ObjectId",
+            "description": "<p>Object id of object group</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "object-groups.id",
+            "description": "<p>Object group ID</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "object-groups.name",
+            "description": "<p>Object group name</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "object-groups.description",
+            "description": "<p>Object group description</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "object-groups.location",
+            "description": "<p>Physical or logical location of the object group</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "object-groups.createdAt",
+            "description": "<p>Timestamp of creation in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "object-groups.updatedAt",
+            "description": "<p>Timestamp of latest update in ISO format</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "200 OK",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n    \"ObjectId\": 13,\n    \"id\": 3,\n    \"name\": \"Spanish\",\n    \"description\": \"Spanish channels\",\n    \"location\": \"Spain\",\n    \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n    \"updatedAt\": \"2015-08-31T14:35:21.202Z\"\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/object-groups.js",
+    "groupTitle": "Object_Group",
+    "error": {
+      "fields": {
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/api/v1/object-groups",
+    "title": "2 - Create object group",
+    "name": "PostObjectGroups",
+    "group": "Object_Group",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Object group name</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Object group description</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "location",
+            "description": "<p>Physical or logical location of the object group</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Object group ID</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "201 Created",
+          "content": "POST /api/v1/object-groups HTTP/1.1\n{\n  \"name\": \"Spanish\",\n  \"description\": \"Spanish channels\",\n  \"location\": \"Spain\"\n}\n\nHTTP/1.1 201 Created\nLocation: /api/v1/object-groups/3",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/object-groups.js",
+    "groupTitle": "Object_Group",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p>Bad Request</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"code\": \"BadRequest\",\n  \"message\": \"Validation failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/api/v1/object-groups/:id",
+    "title": "4 - Replace object group",
+    "name": "PutObjectGroup",
+    "group": "Object_Group",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Object group name</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Object group description</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "location",
+            "description": "<p>Physical or logical location of the object group</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Object group ID</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "201 OK",
+          "content": "PUT /api/v1/object-groups/3 HTTP/1.1\n{\n  \"name\": \"Spanish\",\n  \"description\": \"Spanish channels\",\n  \"location\": \"Spain\",\n  \"layout\": {}\n}\n\nHTTP/1.1 200 OK\n{\n  \"ObjectId\": 13,\n  \"id\": 3,\n  \"name\": \"Spanish\",\n  \"description\": \"Spanish channels\",\n  \"location\": \"Spain\",\n  \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n  \"updatedAt\": \"2015-08-31T14:35:21.202Z\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/object-groups.js",
+    "groupTitle": "Object_Group",
     "error": {
       "fields": {
         "4xx": [
@@ -2048,6 +2773,1032 @@ define({ "api": [
     },
     "filename": "src/controllers/v1/screens.js",
     "groupTitle": "Screen",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p>Bad Request</p> "
+          },
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"code\": \"BadRequest\",\n  \"message\": \"Validation failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/api/v1/situations/:id",
+    "title": "5 - Delete situation",
+    "name": "DeleteSituation",
+    "group": "Situation",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Situation ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "2xx": [
+          {
+            "group": "2xx",
+            "optional": false,
+            "field": "204",
+            "description": "<p>No Content</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "204 No Content",
+          "content": "HTTP/1.1 204 No Content",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/situations.js",
+    "groupTitle": "Situation",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/situations/:id",
+    "title": "3 - Get situation",
+    "name": "GetSituation",
+    "group": "Situation",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Situation ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Situation ID</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>JSON</p> ",
+            "optional": true,
+            "field": "condition",
+            "description": "<p>Evaluable condition expression</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "priority",
+            "description": "<p>Priority</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "showing_time",
+            "description": "<p>Showing time in milliseconds</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Timestamp of creation in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Timestamp of latest update in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "ContainerId",
+            "description": "<p>Container object ID</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "ItemId",
+            "description": "<p>Item object ID</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": 5,\n  \"condition\": {},\n  \"priority\": 0.0,\n  \"showing_time\": 30000.0\n  \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n  \"updatedAt\": \"2015-08-31T14:35:21.202Z\",\n  \"ContainerId\": 3,\n  \"ItemId\": 4\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/situations.js",
+    "groupTitle": "Situation",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/situations",
+    "title": "1 - List situations",
+    "name": "GetSituations",
+    "group": "Situation",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "situations",
+            "description": "<p>List of situations</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "situations.id",
+            "description": "<p>Situation ID</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>JSON</p> ",
+            "optional": true,
+            "field": "situations.condition",
+            "description": "<p>Evaluable condition expression</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "situations.priority",
+            "description": "<p>Priority</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "situations.showing_time",
+            "description": "<p>Showing time in milliseconds</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "situations.createdAt",
+            "description": "<p>Timestamp of creation in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "situations.updatedAt",
+            "description": "<p>Timestamp of latest update in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "situations.ContainerId",
+            "description": "<p>Container object ID</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "situations.ItemId",
+            "description": "<p>Item object ID</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "200 OK",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n    \"id\": 5,\n    \"condition\": {},\n    \"priority\": 0.0,\n    \"showing_time\": 30000.0\n    \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n    \"updatedAt\": \"2015-08-31T14:35:21.202Z\",\n    \"ContainerId\": 3,\n    \"ItemId\": 4\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/situations.js",
+    "groupTitle": "Situation",
+    "error": {
+      "fields": {
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/api/v1/situations",
+    "title": "2 - Create situation",
+    "name": "PostSituations",
+    "group": "Situation",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Situation ID</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "condition",
+            "description": "<p>Evaluable condition expression</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "priority",
+            "description": "<p>Priority</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "showing_time",
+            "description": "<p>Showing time in milliseconds</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Timestamp of creation in ISO format</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Timestamp of latest update in ISO format</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "ContainerId",
+            "description": "<p>Container object ID</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "ItemId",
+            "description": "<p>Item object ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Situation ID</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "201 Created",
+          "content": "POST /api/v1/situations HTTP/1.1\n{\n  \"condition\": {},\n  \"priority\": 0.0,\n  \"showing_time\": 30000.0,\n  \"ContainerId\": 3,\n  \"ItemId\": 4\n}\n\nHTTP/1.1 201 Created\nLocation: /api/v1/situations/5",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/situations.js",
+    "groupTitle": "Situation",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p>Bad Request</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"code\": \"BadRequest\",\n  \"message\": \"Validation failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/api/v1/situations/:id",
+    "title": "4 - Replace situation",
+    "name": "PutSituation",
+    "group": "Situation",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Situation ID</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "condition",
+            "description": "<p>Evaluable condition expression</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "priority",
+            "description": "<p>Priority</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "showing_time",
+            "description": "<p>Showing time in milliseconds</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Timestamp of creation in ISO format</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Timestamp of latest update in ISO format</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "ContainerId",
+            "description": "<p>Container object ID</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "ItemId",
+            "description": "<p>Item object ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Display ID</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "200 OK",
+          "content": "PUT /api/v1/displays/5 HTTP/1.1\n{\n  \"condition\": {},\n  \"priority\": 0.0,\n  \"showing_time\": 30000.0,\n  \"ContainerId\": 3,\n  \"ItemId\": 4\n}\n\nHTTP/1.1 200 OK\n{\n  \"id\": 5,\n  \"condition\": {},\n  \"priority\": 0.0,\n  \"showing_time\": 30000.0\n  \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n  \"updatedAt\": \"2015-08-31T14:35:21.202Z\",\n  \"ContainerId\": 3,\n  \"ItemId\": 4\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/situations.js",
+    "groupTitle": "Situation",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p>Bad Request</p> "
+          },
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"code\": \"BadRequest\",\n  \"message\": \"Validation failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/api/v1/statuses/:id",
+    "title": "5 - Delete status",
+    "name": "DeleteStatus",
+    "group": "Status",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Status ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "2xx": [
+          {
+            "group": "2xx",
+            "optional": false,
+            "field": "204",
+            "description": "<p>No Content</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "204 No Content",
+          "content": "HTTP/1.1 204 No Content",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/statuses.js",
+    "groupTitle": "Status",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/statuses/:id",
+    "title": "3 - Get status",
+    "name": "GetStatus",
+    "group": "Status",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Status ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Status ID</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "status",
+            "description": "<p>New status</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "comment",
+            "description": "<p>Administrator's comment</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Timestamp of creation in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "updatedAt",
+            "description": "<p>Timestamp of latest update in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "DisplayId",
+            "description": "<p>Parent display ID</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "200 OK",
+          "content": "HTTP/1.1 200 OK\n{\n  \"id\": 5,\n  \"status\": \"OK\",\n  \"comment\": \"\",\n  \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n  \"updatedAt\": \"2015-08-31T14:35:21.202Z\",\n  \"DisplayId\": 3\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/statuses.js",
+    "groupTitle": "Status",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "404",
+            "description": "<p>Not Found</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "404 Not Found",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"code\": \"NotFoundError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/v1/statuses",
+    "title": "1 - List statuses",
+    "name": "GetStatuses",
+    "group": "Status",
+    "version": "0.1.0",
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Object[]</p> ",
+            "optional": false,
+            "field": "statuses",
+            "description": "<p>List of statuses</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "statuses.id",
+            "description": "<p>Status ID</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "statuses.status",
+            "description": "<p>New status</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "statuses.comment",
+            "description": "<p>Administrator's comment</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "statuses.createdAt",
+            "description": "<p>Timestamp of creation in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>String</p> ",
+            "optional": false,
+            "field": "statuses.updatedAt",
+            "description": "<p>Timestamp of latest update in ISO format</p> "
+          },
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "statuses.DisplayId",
+            "description": "<p>Parent display ID</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "200 OK",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n    \"id\": 5,\n    \"status\": \"OK\",\n    \"comment\": \"\",\n    \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n    \"updatedAt\": \"2015-08-31T14:35:21.202Z\",\n    \"DisplayId\": 3\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/statuses.js",
+    "groupTitle": "Status",
+    "error": {
+      "fields": {
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/api/v1/statuses",
+    "title": "2 - Create status",
+    "name": "PostStatuses",
+    "group": "Status",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "status",
+            "description": "<p>New status</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "comment",
+            "description": "<p>Administrator's comment</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "DisplayId",
+            "description": "<p>Parent display ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Status ID</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "201 Created",
+          "content": "POST /api/v1/statuses HTTP/1.1\n{\n  \"status\": \"OK\",\n  \"comment\": \"\",\n  \"DisplayId\": 3\n}\n\nHTTP/1.1 201 Created\nLocation: /api/v1/statuses/5",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/statuses.js",
+    "groupTitle": "Status",
+    "error": {
+      "fields": {
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "400",
+            "description": "<p>Bad Request</p> "
+          }
+        ],
+        "5xx": [
+          {
+            "group": "5xx",
+            "optional": false,
+            "field": "500",
+            "description": "<p>Internal Server Error</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"code\": \"BadRequest\",\n  \"message\": \"Validation failed\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server Error\n{\n  \"code\": \"InternalError\",\n  \"message\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "put",
+    "url": "/api/v1/statuses/:id",
+    "title": "4 - Replace status",
+    "name": "PutStatus",
+    "group": "Status",
+    "version": "0.1.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "status",
+            "description": "<p>New status</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>String</p> ",
+            "optional": true,
+            "field": "comment",
+            "description": "<p>Administrator's comment</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "<p>Number</p> ",
+            "optional": true,
+            "field": "DisplayId",
+            "description": "<p>Parent display ID</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "200": [
+          {
+            "group": "200",
+            "type": "<p>Number</p> ",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Display ID</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "200 OK",
+          "content": "PUT /api/v1/displays/5 HTTP/1.1\n{\n  \"status\": \"OK\",\n  \"comment\": \"\",\n  \"DisplayId\": 3\n}\n\nHTTP/1.1 200 OK\n{\n  \"id\": 5,\n  \"status\": \"OK\",\n  \"comment\": \"\",\n  \"createdAt\": \"2015-08-31T14:35:21.202Z\",\n  \"updatedAt\": \"2015-08-31T14:35:21.202Z\",\n  \"DisplayId\": 3\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/controllers/v1/statuses.js",
+    "groupTitle": "Status",
     "error": {
       "fields": {
         "4xx": [

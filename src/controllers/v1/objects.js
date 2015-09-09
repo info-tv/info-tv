@@ -8,57 +8,78 @@ var Object = models['Object'];
 module.exports = {
   before: AbstractController.before,
 
-  /**
-   * Find Object where id = req.params.id and store it to req.instance
-   *
-   * 404 Not Found             - if instance was not found
-   * 500 Internal Server Error - if there was any other problems
-   */
   findById: AbstractController.findById.bind(this, Object),
 
   /**
-   * GET /api/v1/objects
+   * @api {get} /api/v1/objects 1 - List objects
+   * @apiName GetObjects
+   * @apiGroup Object
+   * @apiVersion 0.1.0
    *
-   * 200 OK                    - if there was no problems
-   * 500 Internal Server Error - if there was any problems
+   * @apiSuccess (200) {Object[]} objects           List of objects
+   * @apiSuccess (200) {Number}   objects.id        Object ID
+   * @apiSuccess (200) {String}   objects.kind      Table name of the real object
+   * @apiSuccess (200) {String}   objects.createdAt Timestamp of creation in ISO format
+   * @apiSuccess (200) {String}   objects.updatedAt Timestamp of latest update in ISO format
+   *
+   * @apiSuccessExample {json} 200 OK
+   *     HTTP/1.1 200 OK
+   *     [
+   *       {
+   *         "id": 18,
+   *         "kind": "Content",
+   *         "createdAt": "2015-08-31T14:35:21.202Z",
+   *         "updatedAt": "2015-08-31T14:35:21.202Z"
+   *       }
+   *     ]
+   *
+   *
+   * @apiUse 500InternalServerError
    */
   index: AbstractController.index.bind(this, Object),
 
   /**
-   * POST /api/v1/objects
+   * @api {get} /api/v1/objects/:id 2 - Get object
+   * @apiName GetObject
+   * @apiGroup Object
+   * @apiVersion 0.1.0
    *
-   * 201 Created with no content - if Object was created
-   * - Location: url for the created Object
-   * 400 Bad Request             - if validation failed
-   * 500 Internal Server Error   - if there was any other problems
-   */
-  create: AbstractController.create.bind(this, Object),
-
-  /**
-   * GET /api/v1/objects/:id
+   * @apiParam         {Number} id        Object ID
    *
-   * 200 OK                    - if Object was found
-   * 404 Not Found             - if Object was not found
-   * 500 Internal Server Error - if there was any other problems
+   * @apiSuccess (200) {Number} id        Object ID
+   * @apiSuccess (200) {String} kind      Table name of the real object
+   * @apiSuccess (200) {String} createdAt Timestamp of creation in ISO format
+   * @apiSuccess (200) {String} updatedAt Timestamp of latest update in ISO format
+   *
+   * @apiSuccessExample {json} 200 OK
+   *     HTTP/1.1 200 OK
+   *     {
+   *       "id": 18,
+   *       "kind": "Content",
+   *       "createdAt": "2015-08-31T14:35:21.202Z",
+   *       "updatedAt": "2015-08-31T14:35:21.202Z"
+   *     }
+   *
+   * @apiUse 404NotFound
+   * @apiUse 500InternalServerError
    */
   show: AbstractController.show.bind(this, Object),
 
   /**
-   * PUT /api/v1/objects/:id
+   * @api {delete} /api/v1/objects/:id 3 - Delete object
+   * @apiName DeleteObject
+   * @apiGroup Object
+   * @apiVersion 0.1.0
    *
-   * 200 OK                    - if Object was updated
-   * 400 Bad Request           - if validation failed
-   * 404 Not Found             - if Object was not found
-   * 500 Internal Server Error - if there was any other problems
-   */
-  update: AbstractController.update.bind(this, Object),
-
-  /**
-   * DELETE /api/v1/objects/:id
+   * @apiParam {Number} id Object ID
    *
-   * 204 No Content            - if Object was destroyed
-   * 404 Not Found             - if Object was not found
-   * 500 Internal Server Error - if there was any other problems
+   * @apiSuccess (2xx) 204 No Object
+   *
+   * @apiSuccessExample {json} 204 No Object
+   *     HTTP/1.1 204 No Object
+   *
+   * @apiUse 404NotFound
+   * @apiUse 500InternalServerError
    */
   destroy: AbstractController.destroy.bind(this, Object)
 };

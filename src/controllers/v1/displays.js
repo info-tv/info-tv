@@ -167,23 +167,43 @@ module.exports = {
    * @apiParam {Object} [y=0]         Y coordinate (in pixels) of the top-left corner of the display in screen
    * @apiParam {Number} [ScreenId]    Parent screen ID
    *
-   * @apiSuccess (201) {Number} id    Display ID
+   * @apiSuccess (200) {Number} id    Display ID
    *
-   * @apiSuccessExample {json} 201 Created
-   *     POST /api/v1/screens HTTP/1.1
+   * @apiSuccessExample {json} 200 OK
+   *     PUT /api/v1/displays/5 HTTP/1.1
    *     {
+   *       "name": "RPI3",
+   *       "description": "Lorem ipsum dolor sit amet...",
+   *       "location": "Stage D",
    *       "width_mm": 200,
    *       "height_mm": 113,
    *       "width_px": 1920,
    *       "height_px": 1080,
-   *       "name": "SD3",
-   *       "description": "Lorem ipsum dolor sit amet...",
-   *       "location": "Stage D",
-   *       "layout": {}
+   *       "x": 0,
+   *       "y": 0,
+   *       "ssh": "ssh://192.168.4.15",
+   *       "public_key": "ssh-rsa AAAAB3...YPkgJD pi@192.168.4.15",
+   *       "ScreenId": 3
    *     }
    *
-   *     HTTP/1.1 201 Created
-   *     Location: /api/v1/screens/3
+   *     HTTP/1.1 200 OK
+   *     {
+   *       "id": 5,
+   *       "name": "RPI3",
+   *       "description": "Lorem ipsum dolor sit amet...",
+   *       "location": "Stage D",
+   *       "width_mm": 200,
+   *       "height_mm": 113,
+   *       "width_px": 1920,
+   *       "height_px": 1080,
+   *       "x": 0,
+   *       "y": 0,
+   *       "ssh": "ssh://192.168.4.15",
+   *       "public_key": "ssh-rsa AAAAB3...YPkgJD pi@192.168.4.15",
+   *       "createdAt": "2015-08-31T14:35:21.202Z",
+   *       "updatedAt": "2015-08-31T14:35:21.202Z",
+   *       "ScreenId": 3
+   *     }
    *
    * @apiUse 400BadRequest
    * @apiUse 404NotFound

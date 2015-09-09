@@ -16,12 +16,12 @@ module.exports = {
    * @apiGroup Content
    * @apiVersion 0.1.0
    *
-   * @apiSuccess (200) {Object[]} contents               List of contents
-   * @apiSuccess (200) {Number}   contents.ObjectId      Object id of content
-   * @apiSuccess (200) {Number}   contents.id            Content ID
-   * @apiSuccess (200) {String}   contents.kind          Table name of the real content
-   * @apiSuccess (200) {String}   contents.createdAt     Timestamp of creation in ISO format
-   * @apiSuccess (200) {String}   contents.updatedAt     Timestamp of latest update in ISO format
+   * @apiSuccess (200) {Object[]} contents           List of contents
+   * @apiSuccess (200) {Number}   contents.ObjectId  Object id of content
+   * @apiSuccess (200) {Number}   contents.id        Content ID
+   * @apiSuccess (200) {String}   contents.kind      Table name of the real content
+   * @apiSuccess (200) {String}   contents.createdAt Timestamp of creation in ISO format
+   * @apiSuccess (200) {String}   contents.updatedAt Timestamp of latest update in ISO format
    *
    * @apiSuccessExample {json} 200 OK
    *     HTTP/1.1 200 OK
@@ -41,7 +41,7 @@ module.exports = {
   index: AbstractController.index.bind(this, Content),
 
   /**
-   * @api {get} /api/v1/contents/:id 3 - Get content
+   * @api {get} /api/v1/contents/:id 2 - Get content
    * @apiName GetContent
    * @apiGroup Content
    * @apiVersion 0.1.0
@@ -70,7 +70,7 @@ module.exports = {
   show: AbstractController.show.bind(this, Content),
 
   /**
-   * @api {delete} /api/v1/contents/:id 5 - Delete content
+   * @api {delete} /api/v1/contents/:id 3 - Delete content
    * @apiName DeleteContent
    * @apiGroup Content
    * @apiVersion 0.1.0
