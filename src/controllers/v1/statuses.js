@@ -16,6 +16,9 @@ module.exports = {
    * @apiGroup Status
    * @apiVersion 0.1.0
    *
+   * @apiDescription Every display has history of statuses with current status
+   * which are basically 'working' or 'not working'.
+   *
    * @apiSuccess (200) {Object[]} statuses             List of statuses
    * @apiSuccess (200) {Number}   statuses.id          Status ID
    * @apiSuccess (200) {String}   [statuses.status]    New status

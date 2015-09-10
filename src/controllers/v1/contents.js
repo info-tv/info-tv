@@ -16,6 +16,11 @@ module.exports = {
    * @apiGroup Content
    * @apiVersion 0.1.0
    *
+   * @apiDescription Content is an abstract entity. The real ones can be e.g. an
+   * image, a video, a slideshow, or a web page. They are all some kind of
+   * content types. They can be shown in a channel or even in a screen in a
+   * specific situation.
+   *
    * @apiSuccess (200) {Object[]} contents           List of contents
    * @apiSuccess (200) {Number}   contents.ObjectId  Object id of content
    * @apiSuccess (200) {Number}   contents.id        Content ID

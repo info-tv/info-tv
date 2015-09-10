@@ -16,6 +16,13 @@ module.exports = {
    * @apiGroup Screen
    * @apiVersion 0.1.0
    *
+   * @apiDescription Screen is an virtual screen. It contains one or more
+   * physical displays (video walls have many displays). Screen have its own
+   * layout and style which is usually overridden by layout and style of
+   * channels whom it usually shows. In a rare cases, a screen can also show
+   * content even if it is not showing in any channel. This is, for example, for
+   * emergency notifications.
+   *
    * @apiSuccess (200) {Object[]} screens               List of screens
    * @apiSuccess (200) {Number}   screens.ObjectId      Object id of screen
    * @apiSuccess (200) {Number}   screens.id            Screen ID

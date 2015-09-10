@@ -16,6 +16,11 @@ module.exports = {
    * @apiGroup Channel
    * @apiVersion 0.1.0
    *
+   * @apiDescription Channel is like all channels in TV. Every channel have
+   * their own layout and content flow and if screen is showing one channel in
+   * one moment and then changes it to another, it is showing the second channel
+   * which can be very different than the previous one.
+   *
    * @apiSuccess (200) {Object[]} channels               List of channels
    * @apiSuccess (200) {Number}   channels.ObjectId      Object id of channel
    * @apiSuccess (200) {Number}   channels.id            Channel ID

@@ -16,6 +16,11 @@ module.exports = {
    * @apiGroup Object Group
    * @apiVersion 0.1.0
    *
+   * @apiDescription Any objects can be grouped, and these groups can be
+   * grouped. For example, there can be group of contents in a same field and
+   * then the group is shown in a channel. The result is that all contents in
+   * that group are shown in the channel.
+   *
    * @apiSuccess (200) {Object[]} object-groups               List of object groups
    * @apiSuccess (200) {Number}   object-groups.ObjectId      Object id of object group
    * @apiSuccess (200) {Number}   object-groups.id            Object group ID

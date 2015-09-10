@@ -16,6 +16,11 @@ module.exports = {
    * @apiGroup Display
    * @apiVersion 0.1.0
    *
+   * @apiDescription Display is a physical display, for example Raspberry Pi
+   * with TV as its monitor. Display belongs to virtual screen and shows its
+   * content. There may also be multiple displays in an one screen, that's video
+   * wall, and one display is responsible of some area of the screen.
+   *
    * @apiSuccess (200) {Object[]} displays               List of displays
    * @apiSuccess (200) {Number}   displays.id            Display ID
    * @apiSuccess (200) {String}   [displays.name]        Display name

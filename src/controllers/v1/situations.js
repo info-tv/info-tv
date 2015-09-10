@@ -16,6 +16,11 @@ module.exports = {
    * @apiGroup Situation
    * @apiVersion 0.1.0
    *
+   * @apiDescription Situation is an evaluable condition, which determines if an
+   * item should be shown in a container. Contents can be shown on channels and
+   * screens, but channels can be only shown on screens. Clock or event based
+   * condition expression can be evaluated basically to 'true' or 'false'.
+   *
    * @apiSuccess (200) {Object[]} situations                List of situations
    * @apiSuccess (200) {Number}   situations.id             Situation ID
    * @apiSuccess (200) {JSON}     [situations.condition]    Evaluable condition expression

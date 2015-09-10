@@ -205,6 +205,7 @@
     "name": "GetChannels",
     "group": "Channel",
     "version": "0.1.0",
+    "description": "<p>Channel is like all channels in TV. Every channel have their own layout and content flow and if screen is showing one channel in one moment and then changes it to another, it is showing the second channel which can be very different than the previous one.</p> ",
     "success": {
       "fields": {
         "200": [
@@ -693,6 +694,7 @@
     "name": "GetContents",
     "group": "Content",
     "version": "0.1.0",
+    "description": "<p>Content is an abstract entity. The real ones can be e.g. an image, a video, a slideshow, or a web page. They are all some kind of content types. They can be shown in a channel or even in a screen in a specific situation.</p> ",
     "success": {
       "fields": {
         "200": [
@@ -1016,6 +1018,7 @@
     "name": "GetDisplays",
     "group": "Display",
     "version": "0.1.0",
+    "description": "<p>Display is a physical display, for example Raspberry Pi with TV as its monitor. Display belongs to virtual screen and shows its content. There may also be multiple displays in an one screen, that's video wall, and one display is responsible of some area of the screen.</p> ",
     "success": {
       "fields": {
         "200": [
@@ -1631,6 +1634,7 @@
     "name": "GetObjects",
     "group": "Object",
     "version": "0.1.0",
+    "description": "<p>Object is an abstract entity. The real ones are channel, screen, object group, and different types of content. They all can be grouped and some of them can be shown in another depending on situations.</p> ",
     "success": {
       "fields": {
         "200": [
@@ -1899,6 +1903,7 @@
     "name": "GetObjectGroups",
     "group": "Object_Group",
     "version": "0.1.0",
+    "description": "<p>Any objects can be grouped, and these groups can be grouped. For example, there can be group of contents in a same field and then the group is shown in a channel. The result is that all contents in that group are shown in the channel.</p> ",
     "success": {
       "fields": {
         "200": [
@@ -2417,6 +2422,7 @@
     "name": "GetScreens",
     "group": "Screen",
     "version": "0.1.0",
+    "description": "<p>Screen is an virtual screen. It contains one or more physical displays (video walls have many displays). Screen have its own layout and style which is usually overridden by layout and style of channels whom it usually shows. In a rare cases, a screen can also show content even if it is not showing in any channel. This is, for example, for emergency notifications.</p> ",
     "success": {
       "fields": {
         "200": [
@@ -3022,6 +3028,7 @@
     "name": "GetSituations",
     "group": "Situation",
     "version": "0.1.0",
+    "description": "<p>Situation is an evaluable condition, which determines if an item should be shown in a container. Contents can be shown on channels and screens, but channels can be only shown on screens. Clock or event based condition expression can be evaluated basically to 'true' or 'false'.</p> ",
     "success": {
       "fields": {
         "200": [
@@ -3570,6 +3577,7 @@
     "name": "GetStatuses",
     "group": "Status",
     "version": "0.1.0",
+    "description": "<p>Every display has history of statuses with current status which are basically 'working' or 'not working'.</p> ",
     "success": {
       "fields": {
         "200": [

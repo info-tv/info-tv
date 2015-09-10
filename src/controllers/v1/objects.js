@@ -16,6 +16,10 @@ module.exports = {
    * @apiGroup Object
    * @apiVersion 0.1.0
    *
+   * @apiDescription Object is an abstract entity. The real ones are channel,
+   * screen, object group, and different types of content. They all can be
+   * grouped and some of them can be shown in another depending on situations.
+   *
    * @apiSuccess (200) {Object[]} objects           List of objects
    * @apiSuccess (200) {Number}   objects.id        Object ID
    * @apiSuccess (200) {String}   objects.kind      Table name of the real object
