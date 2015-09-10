@@ -2,14 +2,14 @@ var _ = require('lodash');
 
 var Nameable = require('./_nameable');
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = function (sequelize) {
   var ObjectGroup = sequelize.define('ObjectGroup', _.extend({},
     Nameable.attributes
   ), {
     classMethods: {
       associate: function (models) {
-        ObjectGroup.belongsTo(models['Object']);
-        ObjectGroup.belongsToMany(models['Object'], {
+        ObjectGroup.belongsTo(models.Object);
+        ObjectGroup.belongsToMany(models.Object, {
           as: 'Members',
           through: 'ObjectGroupMembers'
         });

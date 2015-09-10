@@ -38,7 +38,9 @@ AbstractItem.getItem = function getItem(params) {
   }
 
   var newPath = path + '.' + type;
-  if (path === '') newPath = type;
+  if (path === '') {
+    newPath = type;
+  }
 
   switch (type) {
     case 'oneOf':
@@ -82,7 +84,8 @@ AbstractItem.prototype.listen = function listen(callback) {
  * Destroys all bindings of condition. Used to clear timeouts when condition is
  * not relevant any more.
  */
-AbstractItem.prototype.destroy = function destroy() {};
+AbstractItem.prototype.destroy = function destroy() {
+};
 
 /**
  * Listen all child items for their status changes
@@ -90,7 +93,8 @@ AbstractItem.prototype.destroy = function destroy() {};
  * @param {listenCallback} callback - called when status has changed
  * @protected
  */
-AbstractItem.prototype._listenChilds = function _listenChilds(callback) {};
+AbstractItem.prototype._listenChilds = function _listenChilds(callback) {
+};
 
 /**
  * Call callback if oldStatus doesn't match to current status.

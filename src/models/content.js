@@ -3,13 +3,13 @@ var _ = require('lodash');
 
 var Extendable = require('./_extendable');
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = function (sequelize) {
   var Content = sequelize.define('Content', _.extend({},
     Extendable.attributes(sequelize)
   ), {
     classMethods: {
       associate: function (models) {
-        Content.belongsTo(models['Object']);
+        Content.belongsTo(models.Object);
       },
 
       /**

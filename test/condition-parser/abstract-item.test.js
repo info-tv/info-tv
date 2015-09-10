@@ -23,17 +23,17 @@ describe('condition-parser/abstract-item', function () {
       var changingTime = Math.floor(Math.random() * 1000);
 
       var all = AbstractItem.getItem({
-        childs: { all: {} },
+        childs: {all: {}},
         changingTime: changingTime
       });
 
       var oneOf = AbstractItem.getItem({
-        childs: { oneOf: {} },
+        childs: {oneOf: {}},
         changingTime: changingTime
       });
 
       var clock = AbstractItem.getItem({
-        childs: { clock: { from: Date.now() } },
+        childs: {clock: {from: Date.now()}},
         changingTime: changingTime
       });
 
@@ -57,7 +57,7 @@ describe('condition-parser/abstract-item', function () {
 
     expect(function () {
       AbstractItem.getItem({
-        childs: { invalidItem: {} }
+        childs: {invalidItem: {}}
       });
     }).to.throw();
   });
@@ -65,7 +65,7 @@ describe('condition-parser/abstract-item', function () {
   it('should pass right path to invalid item', function () {
     expect(function () {
       AbstractItem.getItem({
-        childs: { all: [ { oneOf: [ { clock: {} } ] } ] }
+        childs: {all: [{oneOf: [{clock: {}}]}]}
       });
     }).to.throw('all[0].oneOf[0].clock');
   });

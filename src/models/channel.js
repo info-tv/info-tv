@@ -3,14 +3,14 @@ var _ = require('lodash');
 var Layout = require('./_layout');
 var Nameable = require('./_nameable');
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = function (sequelize) {
   var Channel = sequelize.define('Channel', _.extend({},
     Layout.attributes,
     Nameable.attributes
   ), {
     classMethods: {
       associate: function (models) {
-        Channel.belongsTo(models['Object']);
+        Channel.belongsTo(models.Object);
       },
 
       /**

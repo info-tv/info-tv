@@ -36,6 +36,6 @@ module.exports = {
           this.setDataValue('kind', model);
         }
       }
-    }
+    };
   }
 };

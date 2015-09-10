@@ -56,8 +56,8 @@ module.exports = function (sequelize, DataTypes) {
   ), {
     classMethods: {
       associate: function (models) {
-        Display.hasMany(models['Status']);
-        Display.belongsTo(models['Screen']);
+        Display.hasMany(models.Status);
+        Display.belongsTo(models.Screen);
       },
 
       /**

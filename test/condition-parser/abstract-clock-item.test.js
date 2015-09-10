@@ -59,7 +59,7 @@ describe('condition-parser/abstract-clock-item', function () {
   });
 
   it('should allow multiple clock watchers at the same time', function () {
-    var spies = [ chai.spy(), chai.spy() ];
+    var spies = [chai.spy(), chai.spy()];
 
     var item = new AbstractClockItem();
     item._listen(new Date(Date.now() + 0), spies[0]);

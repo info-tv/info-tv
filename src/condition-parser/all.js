@@ -17,7 +17,7 @@ var All = function (path, childs, changingTime) {
   AbstractGroup.apply(this, [path, childs, changingTime]);
 };
 
-All.prototype = _.create(AbstractGroup.prototype, { constructor: All });
+All.prototype = _.create(AbstractGroup.prototype, {constructor: All});
 
 /**
  * Get lowest status of childs. Meaning of statuses are:
@@ -30,7 +30,7 @@ All.prototype = _.create(AbstractGroup.prototype, { constructor: All });
  * @return {string} - false, changing to true, changing to false, or true
  */
 All.prototype.getStatus = function getStatus() {
-  var values = [ 'false', 'changing to true', 'changing to false', 'true' ];
+  var values = ['false', 'changing to true', 'changing to false', 'true'];
 
   var child = _.min(this.childs, function (child) {
     return _.indexOf(values, child.getStatus());

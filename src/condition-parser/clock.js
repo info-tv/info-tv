@@ -21,8 +21,13 @@ var To = require('./to');
 var Clock = function Clock(path, from, to, changingTime) {
   AbstractItem.apply(this, [changingTime]);
 
-  if (from) this.from = new From(from, changingTime);
-  if (to) this.to = new To(to, changingTime);
+  if (from) {
+    this.from = new From(from, changingTime);
+  }
+
+  if (to) {
+    this.to = new To(to, changingTime);
+  }
 
   var rules = {
     from: {
@@ -39,7 +44,7 @@ var Clock = function Clock(path, from, to, changingTime) {
     }
   };
 
-  var errors = validate({ from: from, to: to }, rules);
+  var errors = validate({from: from, to: to}, rules);
 
   if (errors) {
     errors = JSON.stringify(errors);
@@ -48,7 +53,7 @@ var Clock = function Clock(path, from, to, changingTime) {
   }
 };
 
-Clock.prototype = _.create(AbstractItem.prototype, { constructor: Clock });
+Clock.prototype = _.create(AbstractItem.prototype, {constructor: Clock});
 
 
 /**
@@ -62,7 +67,7 @@ Clock.prototype = _.create(AbstractItem.prototype, { constructor: Clock });
  * @return {string} - false, changing to true, changing to false, or true
  */
 Clock.prototype.getStatus = function getStatus() {
-  var values = [ 'false', 'changing to true', 'changing to false', 'true' ];
+  var values = ['false', 'changing to true', 'changing to false', 'true'];
 
   var from = this.from ? this.from.getStatus() : 'true';
   var to = this.to ? this.to.getStatus() : 'true';
@@ -79,8 +84,13 @@ Clock.prototype.getStatus = function getStatus() {
  * @protected
  */
 Clock.prototype._listenChilds = function _listenChilds(callback) {
-  if (this.from) this.from.listen(callback);
-  if (this.to) this.to.listen(callback);
+  if (this.from) {
+    this.from.listen(callback);
+  }
+
+  if (this.to) {
+    this.to.listen(callback);
+  }
 };
 
 module.exports = Clock;

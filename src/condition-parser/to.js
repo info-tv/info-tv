@@ -10,7 +10,7 @@ var AbstractClockItem = require('./abstract-clock-item');
  * @constructor
  * @extends AbstractClockItem
  */
-var To = function To (date, changingTime) {
+var To = function To(date, changingTime) {
   AbstractClockItem.apply(this, [date, changingTime]);
 
   var now = new Date();
@@ -23,7 +23,7 @@ var To = function To (date, changingTime) {
   }
 };
 
-To.prototype = _.create(AbstractClockItem.prototype, { constructor: To });
+To.prototype = _.create(AbstractClockItem.prototype, {constructor: To});
 
 /**
  * Watch the clock for the foresee date and the real date.

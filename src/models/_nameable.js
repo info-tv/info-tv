@@ -1,4 +1,4 @@
-Sequelize = require('sequelize');
+var Sequelize = require('sequelize');
 
 module.exports = {
   attributes: {
@@ -26,6 +26,6 @@ module.exports = {
       name: '',
       description: '',
       location: ''
-    }
+    };
   }
 };

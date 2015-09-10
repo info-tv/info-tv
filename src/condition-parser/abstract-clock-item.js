@@ -70,7 +70,9 @@ AbstractClockItem.prototype._changeStatusIf = function _changeStatusIf(allowedSt
  */
 AbstractClockItem.prototype._listen = function _listen(date, callback) {
   var duration = date.getTime() - Date.now();
-  if (duration < 0) duration = 0;
+  if (duration < 0) {
+    duration = 0;
+  }
 
   var self = this;
   var timeoutID = setTimeout(function () {

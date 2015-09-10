@@ -17,7 +17,7 @@ var OneOf = function (path, childs, changingTime) {
   AbstractGroup.apply(this, [path, childs, changingTime]);
 };
 
-OneOf.prototype = _.create(AbstractGroup.prototype, { constructor: OneOf });
+OneOf.prototype = _.create(AbstractGroup.prototype, {constructor: OneOf});
 
 /**
  * Get highest status of childs. Meaning of statuses are:
@@ -30,7 +30,7 @@ OneOf.prototype = _.create(AbstractGroup.prototype, { constructor: OneOf });
  * @return {string} - false, changing to true, changing to false, or true
  */
 OneOf.prototype.getStatus = function getStatus() {
-  var values = [ 'false', 'changing to true', 'changing to false', 'true' ];
+  var values = ['false', 'changing to true', 'changing to false', 'true'];
 
   var child = _.max(this.childs, function (child) {
     return _.indexOf(values, child.getStatus());

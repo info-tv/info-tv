@@ -4,7 +4,7 @@ var Layout = require('./_layout');
 var MonitorSize = require('./_monitor-size');
 var Nameable = require('./_nameable');
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = function (sequelize) {
   var Screen = sequelize.define('Screen', _.extend({},
     Layout.attributes,
     MonitorSize.attributes,
@@ -12,8 +12,8 @@ module.exports = function (sequelize, DataTypes) {
   ), {
     classMethods: {
       associate: function (models) {
-        Screen.belongsTo(models['Object']);
-        Screen.hasMany(models['Display']);
+        Screen.belongsTo(models.Object);
+        Screen.hasMany(models.Display);
       },
 
       /**

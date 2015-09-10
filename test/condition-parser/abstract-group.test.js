@@ -21,9 +21,9 @@ describe('condition-parser/abstract-group', function () {
       var changingTime = Math.floor(Math.random() * 1000);
 
       var group = new AbstractGroup('', [
-        { all: [] },
-        { oneOf: [] },
-        { clock: { from: Date.now() } }
+        {all: []},
+        {oneOf: []},
+        {clock: {from: Date.now()}}
       ], changingTime);
 
       expect(group).to.be.an.instanceof(AbstractGroup)
@@ -56,7 +56,7 @@ describe('condition-parser/abstract-group', function () {
   it('should not accept any invalid childs', function () {
     expect(function () {
       new AbstractGroup('', [
-        { invalidItem: {} }
+        {invalidItem: {}}
       ]);
     }).to.throw();
   });

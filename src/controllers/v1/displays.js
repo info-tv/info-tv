@@ -1,9 +1,6 @@
-var Sequelize = require('sequelize');
-var _ = require('lodash');
-
 var AbstractController = require('./_abstract-controller');
 var models = require('../../models');
-var Display = models['Display'];
+var Display = models.Display;
 
 module.exports = {
   before: AbstractController.before,

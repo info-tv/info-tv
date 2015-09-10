@@ -35,8 +35,8 @@ describe('condition-parser/all', function () {
     var now = Date.now();
 
     var all = new All('', [
-      { clock: { from:  now + 50 } },
-      { clock: { to: now + 150 } }
+      {clock: {from: now + 50}},
+      {clock: {to: now + 150}}
     ], 45);
 
     var spy = chai.spy();
@@ -63,8 +63,8 @@ describe('condition-parser/all', function () {
     var now = Date.now();
 
     var all = new All('', [
-      { clock: { from:  now + 50 } },
-      { clock: { to: now + 150 } }
+      {clock: {from: now + 50}},
+      {clock: {to: now + 150}}
     ], 45);
 
     var spies = [chai.spy(), chai.spy()];

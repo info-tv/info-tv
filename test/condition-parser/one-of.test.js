@@ -34,8 +34,8 @@ describe('condition-parser/one-of', function () {
     var now = Date.now();
 
     var oneOf = new OneOf('', [
-      { clock: { to:  now + 50 } },
-      { clock: { from: now + 150 } }
+      {clock: {to: now + 50}},
+      {clock: {from: now + 150}}
     ], 45);
 
     var spy = chai.spy();
@@ -62,8 +62,8 @@ describe('condition-parser/one-of', function () {
     var now = Date.now();
 
     var oneOf = new OneOf('', [
-      { clock: { to:  now + 50 } },
-      { clock: { from: now + 150 } }
+      {clock: {to: now + 50}},
+      {clock: {from: now + 150}}
     ], 45);
 
     var spies = [chai.spy(), chai.spy()];

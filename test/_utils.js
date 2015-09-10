@@ -95,7 +95,7 @@ function k_combinations(set, k) {
 
   combs = [];
   for (i = 0; i < set.length - k + 1; i++) {
-    head = set.slice(i, i+1);
+    head = set.slice(i, i + 1);
     tailcombs = k_combinations(set.slice(i + 1), k - 1);
     for (j = 0; j < tailcombs.length; j++) {
       combs.push(head.concat(tailcombs[j]));
