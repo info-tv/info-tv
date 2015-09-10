@@ -68,18 +68,18 @@ gulp.task('migrate', function () {
 
 /**
  * Run mocha tests
+ * - migrate: migrate database to match the codebase
  */
-gulp.task('mocha', function () {
+gulp.task('mocha', ['migrate'], function () {
   return gulp.src(paths.test_js).pipe(mocha());
 });
 
 /**
- * Run migrations and tests
- * - migrate: migrate database to match the code
+ * Run all tests
  * - mocha: run mocha tests
  * - apidoc: try to generate api documentation
  */
-gulp.task('test', ['migrate', 'mocha', 'apidoc']);
+gulp.task('test', ['mocha', 'apidoc']);
 
 /**
  * Run all tasks
