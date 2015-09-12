@@ -1,4 +1,3 @@
-var Sequelize = require('sequelize');
 var _ = require('lodash');
 
 var Extendable = require('./_extendable');

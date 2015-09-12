@@ -20,9 +20,10 @@ fs
     return /^[^._].+\.js$/.test(file) && (file !== basename);
   })
   .forEach(function (file) {
-    if (file.slice(-3) !== '.js') return;
-    var model = sequelize['import'](path.join(__dirname, file));
-    db[model.name] = model;
+    if (file.slice(-3) === '.js') {
+      var model = sequelize['import'](path.join(__dirname, file));
+      db[model.name] = model;
+    }
   });
 
 Object.keys(db).forEach(function (modelName) {

@@ -11,7 +11,7 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
 // create routes for built-in controllers
-new Router(
+var router = new Router(
   server,
   path.join(__dirname, '/controllers'),
   routes,

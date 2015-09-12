@@ -10,8 +10,15 @@ var _ = require('lodash');
  * @apiErrorExample {json} 400 Bad Request
  *     HTTP/1.1 400 Bad Request
  *     {
- *       "code": "BadRequest",
- *       "message": "Validation failed"
+ *       "code": "ValidationError,
+ *       "errors": [
+ *         {
+ *           "message": "some_required_field cannot be null",
+ *           "path": "some_required_field",
+ *           "type": "notNull Violation",
+ *           "value": null
+ *         }
+ *       ]
  *     }
  */
 
@@ -67,8 +74,9 @@ module.exports = {
           next();
         }
       })
-      .catch(function () {
+      .catch(function (e) {
         res.send(new restify.InternalServerError());
+        console.log(e);
       });
   },
 
@@ -87,6 +95,7 @@ module.exports = {
       })
       .catch(function (e) {
         res.send(new restify.InternalServerError());
+        console.log(e);
       });
   },
 
@@ -107,10 +116,14 @@ module.exports = {
         res.send(201);
       })
       .catch(Sequelize.ValidationError, function (e) {
-        res.send(new restify.BadRequestError('Validation failed'));
+        res.send(400, {
+          code: 'ValidationError',
+          errors: e.errors
+        });
       })
       .catch(function (e) {
         res.send(new restify.InternalServerError());
+        console.log(e);
       });
   },
 
@@ -143,10 +156,14 @@ module.exports = {
         res.send(instance);
       })
       .catch(Sequelize.ValidationError, function (e) {
-        res.send(new restify.BadRequestError('Validation failed'));
+        res.send(400, {
+          code: 'ValidationError',
+          errors: e.errors
+        });
       })
       .catch(function (e) {
         res.send(new restify.InternalServerError());
+        console.log(e);
       });
   },
 
@@ -166,6 +183,7 @@ module.exports = {
       })
       .catch(function (e) {
         res.send(new restify.InternalServerError());
+        console.log(e);
       });
   }
 };

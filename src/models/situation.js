@@ -1,5 +1,3 @@
-var _ = require('lodash');
-
 module.exports = function (sequelize, DataTypes) {
   var Situation = sequelize.define('Situation', {
     /**
@@ -62,7 +60,8 @@ module.exports = function (sequelize, DataTypes) {
      * lower/higher priority, the item will be chosen less/more often to the
      * container than ones with priority 0 which is the normal priority.
      *
-     * -∞ means choose never, 0 is normal, and ∞ means choose always.
+     * `-Infinity` means choose never, `0` is normal, and `Infinity` means
+     * choose always.
      */
     priority: {
       type: DataTypes.FLOAT,
