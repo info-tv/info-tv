@@ -10,7 +10,7 @@ var _ = require('lodash');
  * @apiErrorExample {json} 400 Bad Request
  *     HTTP/1.1 400 Bad Request
  *     {
- *       "code": "ValidationError,
+ *       "code": "ValidationError",
  *       "errors": [
  *         {
  *           "message": "some_required_field cannot be null",

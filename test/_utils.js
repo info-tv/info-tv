@@ -137,10 +137,6 @@ function combinations(set) {
 
 // -----------------------------------------------------------------------------
 
-/**
- *
- * @module
- */
 module.exports = {
   // run 'env INGORE_TODOS=1 mocha test/* test/**/*' to disable
   // usage: it('...', $.todo) where $ = require('path/to/_utils')

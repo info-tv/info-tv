@@ -12,7 +12,7 @@ var ConditionParser = require('../../src/condition-parser');
 // other needed files
 var AbstractItem = require('../../src/condition-parser/abstract-item');
 
-describe('condition-parser', function () {
+module.exports = function () {
   it('should be able to parse valid condition', function () {
     expect(function () {
       var changingTime = Math.floor(Math.random() * 1000);
@@ -49,4 +49,4 @@ describe('condition-parser', function () {
       });
     }).to.throw('all[0].oneOf[0].clock');
   });
-});
+};
