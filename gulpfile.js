@@ -31,7 +31,7 @@ gulp.task('apidoc', function (cb) {
  * sequelize db:migrate --migrations-path src/migrations
  */
 gulp.task('migrate', function () {
-  var env = process.env.NODE_ENV || 'development';
+  var env = process.env.NODE_ENV || 'TEST_SQLITE';
   var config = require(paths.config_json)[env];
   config.logging = false;
 

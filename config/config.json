@@ -5,5 +5,13 @@
     "database": "db",
     "dialect": "sqlite",
     "storage": "db.sqlite"
+  },
+  "TEST_SQLITE": {
+    "username": "null",
+    "password": null,
+    "database": "test_sqlite_db",
+    "dialect": "sqlite",
+    "storage": "test.sqlite",
+    "logging": false
   }
 }
