@@ -1,5 +1,8 @@
 {
   "development": {
+    "server": {
+      "port": 3000
+    },
     "username": "null",
     "password": null,
     "database": "db",
@@ -7,6 +10,9 @@
     "storage": "db.sqlite"
   },
   "TEST_SQLITE": {
+    "server": {
+      "port": 8080
+    },
     "username": "null",
     "password": null,
     "database": "test_sqlite_db",
