@@ -1,0 +1,25 @@
+[
+  {
+    "model": "Display",
+    "data": {
+      "id": 1,
+      "ScreenId": null
+    }
+  },
+  {
+    "model": "Display",
+    "data": {
+      "id": 2,
+      "ScreenId": null
+    }
+  },
+  {
+    "model": "Status",
+    "data": {
+      "id": 1,
+      "status": "ok",
+      "comment": null,
+      "DisplayId": 1
+    }
+  }
+]

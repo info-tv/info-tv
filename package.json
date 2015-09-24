@@ -19,10 +19,13 @@
     "bluebird": "^2.10.0",
     "chai": "^3.0.0",
     "chai-spies": "^0.6.0",
+    "chai-subset": "^1.1.0",
+    "chakram": "^1.0.1",
     "gulp": "^3.9.0",
     "gulp-apidoc": "^0.1.5",
     "gulp-mocha": "^2.1.1",
     "mocha": "^2.2.5",
+    "sequelize-fixtures": "^0.4.7",
     "umzug": "^1.6.0"
   },
   "dependencies": {

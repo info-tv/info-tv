@@ -5,7 +5,10 @@ module.exports = function (sequelize, DataTypes) {
      */
     status: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
     },
 
     /**
@@ -33,7 +36,6 @@ module.exports = function (sequelize, DataTypes) {
        */
       defaultValues: function () {
         return {
-          status: null,
           comment: ''
         };
       }

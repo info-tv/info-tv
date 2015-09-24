@@ -149,9 +149,10 @@ module.exports = {
   combinations: combinations
 };
 
-// inject chai with spies
+// load all plugins to chai
 var chai = require('chai');
 chai.use(require('chai-spies'));
+chai.use(require('chai-subset'));
 
 // inject validate with moment
 var validate = require('validate.js');
