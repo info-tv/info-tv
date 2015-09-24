@@ -209,7 +209,7 @@ module.exports = {
             model: 'Screens',
             key: 'id'
           },
-          onDelete: 'CASCADE',
+          onDelete: 'SET NULL',
           onUpdate: 'CASCADE'
         },
         name: {

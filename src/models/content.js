@@ -9,7 +9,12 @@ module.exports = function (sequelize) {
   ), {
     classMethods: {
       associate: function (models) {
-        Content.belongsTo(models.Object);
+        Content.belongsTo(models.Object, {
+          foreignKey: {
+            name: 'ObjectId',
+            allowNull: false
+          }
+        });
       },
 
       /**

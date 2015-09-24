@@ -12,7 +12,12 @@ module.exports = function (sequelize) {
   ), {
     classMethods: {
       associate: function (models) {
-        Screen.belongsTo(models.Object);
+        Screen.belongsTo(models.Object, {
+          foreignKey: {
+            name: 'ObjectId',
+            allowNull: false
+          }
+        });
         Screen.hasMany(models.Display);
       },
 

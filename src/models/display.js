@@ -77,6 +77,28 @@ module.exports = function (sequelize, DataTypes) {
           }
         );
       }
+    },
+
+    validate: {
+      /**
+       * Ensure that Screen exists if not null
+       *
+       * @returns {undefined|Promise}
+       */
+      screenExists: function () {
+        var id = this.getDataValue('ScreenId');
+
+        if (id !== null) {
+          var Screen = sequelize.model('Screen');
+          return Screen.findById(id)
+            .then(function (screen) {
+              if (!screen) {
+                throw new Error('ScreenId must refer to an existing Screen');
+              }
+            });
+        }
+
+      }
     }
   });
 

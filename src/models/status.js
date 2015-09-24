@@ -18,7 +18,12 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function (models) {
-        Status.belongsTo(models.Display);
+        Status.belongsTo(models.Display, {
+          foreignKey: {
+            name: 'DisplayId',
+            allowNull: false
+          }
+        });
       },
 
       /**
@@ -31,6 +36,24 @@ module.exports = function (sequelize, DataTypes) {
           status: null,
           comment: ''
         };
+      }
+    },
+
+    validate: {
+      /**
+       * Ensure that Display exists
+       *
+       * @returns {Promise}
+       */
+      displayExists: function () {
+        var id = this.getDataValue('DisplayId');
+        var Display = sequelize.model('Display');
+        return Display.findById(id)
+          .then(function (display) {
+            if (!display) {
+              throw new Error('DisplayId must refer to an existing Display');
+            }
+          });
       }
     }
   });

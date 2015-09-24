@@ -82,8 +82,18 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function (models) {
-        Situation.belongsTo(models.Object, {as: 'Container'});
-        Situation.belongsTo(models.Object, {as: 'Item'});
+        Situation.belongsTo(models.Object, {as: 'Container'}, {
+          foreignKey: {
+            name: 'ContainerId',
+            allowNull: false
+          }
+        });
+        Situation.belongsTo(models.Object, {as: 'Item'}, {
+          foreignKey: {
+            name: 'ItemId',
+            allowNull: false
+          }
+        });
       },
 
       /**

@@ -10,7 +10,12 @@ module.exports = function (sequelize) {
   ), {
     classMethods: {
       associate: function (models) {
-        Channel.belongsTo(models.Object);
+        Channel.belongsTo(models.Object, {
+          foreignKey: {
+            name: 'ObjectId',
+            allowNull: false
+          }
+        });
       },
 
       /**

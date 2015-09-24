@@ -8,7 +8,12 @@ module.exports = function (sequelize) {
   ), {
     classMethods: {
       associate: function (models) {
-        ObjectGroup.belongsTo(models.Object);
+        ObjectGroup.belongsTo(models.Object, {
+          foreignKey: {
+            name: 'ObjectId',
+            allowNull: false
+          }
+        });
         ObjectGroup.belongsToMany(models.Object, {
           as: 'Members',
           through: 'ObjectGroupMembers'
