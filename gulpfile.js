@@ -71,7 +71,9 @@ gulp.task('migrate', function () {
  * - migrate: migrate database to match the codebase
  */
 gulp.task('mocha', ['migrate'], function () {
-  return gulp.src(paths.test_js).pipe(mocha());
+  return gulp.src(paths.test_js).pipe(mocha({
+    reporter: 'dot'
+  }));
 });
 
 /**
